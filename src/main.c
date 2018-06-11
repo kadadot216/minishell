@@ -11,6 +11,9 @@
 #include "main.h"
 #include "prompt.h"
 
+#include <sys/types.h>
+#include <sys/wait.h>
+
 #include "debug.h"
 
 char	*get_env(char **env, char *var)
@@ -42,18 +45,9 @@ char	*search_exec(char *exec_prompt, char **path)
 		my_strcat(exec_fp, path[i]);
 		my_strcat(exec_fp, "/");
 		my_strcat(exec_fp, exec_prompt);
-		///
-		my_putstr("Testing ");
-		my_putstr(exec_fp);
-		my_putchar('\n');
-		///
-		if (access(exec_fp, F_OK) == 0 && access(exec_fp, X_OK) == 0) {
-			///
-			my_putstr(exec_fp);
-			my_putchar('\n');
+		if (access(exec_fp, F_OK) == 0 && access(exec_fp, X_OK) == 0)
 			return (exec_fp);
-			///
-		} else {
+		else {
 			free(exec_fp);
 			i++;
 		}
@@ -66,9 +60,11 @@ void	launch_cmd(char **prompt, char **env)
 {
 	char	**path = my_strtotab(get_env(env, "PATH"), ":");
 	char	*exec_bin = search_exec(prompt[0], path);
-	if (exec_bin != NULL)
+	pid_t	pid = fork();
+
+	if (exec_bin != NULL && pid == 0)
 		execve(exec_bin, prompt, env);
-	my_putstr(exec_bin);
+	wait(0);
 	free(exec_bin);
 	my_free_strtab(path);
 }
