@@ -66,10 +66,8 @@ void	launch_cmd(char **prompt, char **env)
 {
 	char	**path = my_strtotab(get_env(env, "PATH"), ":");
 	char	*exec_bin = search_exec(prompt[0], path);
-	//my_show_word_array(path);
-	//execve("/bin/ls", NULL, env);
 	if (exec_bin != NULL)
-		execve(search_exec(exec_bin, path), prompt, env);
+		execve(exec_bin, prompt, env);
 	my_putstr(exec_bin);
 	free(exec_bin);
 	my_free_strtab(path);
