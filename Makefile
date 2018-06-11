@@ -18,7 +18,8 @@ LIB_HDPATH	=	$(LIB_PATH)/include
 
 LIB_HDSRC	=	my.h		\
 			str.h		\
-			strtab.h
+			strtab.h	\
+			debug.h
 			
 
 LIB_HDS		=	$(addprefix $(LIB_HDPATH)/, $(LIB_HDSRC))
@@ -35,6 +36,7 @@ LIB_SRCS	=	str/my_strcmp.c		\
 			strtab/my_strtabdup.c	\
 			strtab/my_strtablen.c	\
 			strtab/my_strtotabpt.c	\
+			debug/my_show_word_array.c	\
 			my_putchar.c		\
 			my_putstr.c
 
