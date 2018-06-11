@@ -16,5 +16,6 @@ int	my_strlen(char const *str);
 char	*my_strncat(char *dest, char const *src, int nb);
 int	my_strncmp(char const *s1, char const *s2, int n);
 char	*my_strncpy(char *dest, char const *src, int n);
+char	*my_strcat(char *dest, char const *src);
 
 #endif

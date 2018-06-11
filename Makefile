@@ -32,6 +32,7 @@ LIB_SRCS	=	str/my_strcmp.c		\
 			str/my_strncpy.c 	\
 			str/my_strdup.c 	\
 			str/my_memset.c 	\
+			str/my_strcat.c 	\
 			strtab/my_strtabcpy.c	\
 			strtab/my_strtabdup.c	\
 			strtab/my_strtablen.c	\

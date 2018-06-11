@@ -29,12 +29,49 @@ char	*get_env(char **env, char *var)
 	return (0);
 }
 
+char	*search_exec(char *exec_prompt, char **path)
+{
+	int	i = 0;
+	char	*exec_fp = NULL;
+	int	exec_fp_length = 0;
+
+	while (path[i] != NULL) {
+		exec_fp_length = (my_strlen(path[i]) + my_strlen(exec_prompt) + 1);
+		exec_fp = malloc(exec_fp_length + 1);
+		my_memset(exec_fp, '\0', exec_fp_length);
+		my_strcat(exec_fp, path[i]);
+		my_strcat(exec_fp, "/");
+		my_strcat(exec_fp, exec_prompt);
+		///
+		my_putstr("Testing ");
+		my_putstr(exec_fp);
+		my_putchar('\n');
+		///
+		if (access(exec_fp, F_OK) == 0 && access(exec_fp, X_OK) == 0) {
+			///
+			my_putstr(exec_fp);
+			my_putchar('\n');
+			return (exec_fp);
+			///
+		} else {
+			free(exec_fp);
+			i++;
+		}
+	}
+	my_putstr("Command not found.\n");
+	return (NULL);
+}
+
 void	launch_cmd(char **prompt, char **env)
 {
 	char	**path = my_strtotab(get_env(env, "PATH"), ":");
+	char	*exec_bin = search_exec(prompt[0], path);
 	//my_show_word_array(path);
 	//execve("/bin/ls", NULL, env);
-	execve(prompt[0], prompt, env);
+	if (exec_bin != NULL)
+		execve(search_exec(exec_bin, path), prompt, env);
+	my_putstr(exec_bin);
+	free(exec_bin);
 	my_free_strtab(path);
 }
 
@@ -46,7 +83,6 @@ int	main(int ac, char **av, char **ae)
 	char	**prompt = wait_for_prompt(prompt);
 
 	while (prompt_is_valid(prompt)) {
-		my_show_word_array(prompt);
 		launch_cmd(prompt, env);
 		my_free_strtab(prompt);
 		prompt = wait_for_prompt(prompt);
