@@ -9,14 +9,32 @@
 #include "gnl.h"
 #include <stdlib.h>
 
-int	my_strtab_isvalid(char *const *tab)
+char	*gnl_is_valid(char *str)
 {
-	return (tab[0] != NULL);
+	if (str == NULL || my_strcmp(str, "\0") == 0)
+		return (NULL);
+	else
+		return (str);
 }
 
-int	wait_for_prompt(char ***prompt)
+char	**prompt_is_valid(char **prompt)
 {
+	if (prompt == NULL || my_strcmp(prompt[0], "\0") == 0)
+		return (NULL);
+	else
+		return (prompt);
+}
+
+char	**wait_for_prompt(char **prompt)
+{
+	char	*gnl_prompt = NULL;
+
 	my_putstr("$>");
-	*prompt = my_strtotab(get_next_line(0), " ");
-	return (my_strtab_isvalid(*prompt));
+	gnl_prompt = get_next_line(0);
+	if (!gnl_is_valid(gnl_prompt))
+		return (NULL);
+	else {
+		prompt = my_strtotab(gnl_prompt, " ");
+		return (prompt_is_valid(prompt));
+	}
 }

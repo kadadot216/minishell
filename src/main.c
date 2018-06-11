@@ -31,10 +31,11 @@ char	*get_env(char **env, char *var)
 
 void	launch_cmd(char **prompt, char **env)
 {
-	char	*path = get_env(env, "PATH");
-	char	**pathtab = my_strtotab(path, ":");
-	my_show_word_array(pathtab);
-	my_free_strtab(pathtab);
+	char	**path = my_strtotab(get_env(env, "PATH"), ":");
+	//my_show_word_array(path);
+	//execve("/bin/ls", NULL, env);
+	execve(prompt[0], prompt, env);
+	my_free_strtab(path);
 }
 
 
@@ -42,13 +43,13 @@ int	main(int ac, char **av, char **ae)
 {
 	struct stat	sb;
 	char	**env = my_strtabdup(ae);
-	char	**prompt = NULL;
+	char	**prompt = wait_for_prompt(prompt);
 
-	while (wait_for_prompt(&prompt)) {
-		//my_show_word_array(prompt);
-		//my_putchar('\n');
+	while (prompt_is_valid(prompt)) {
+		my_show_word_array(prompt);
 		launch_cmd(prompt, env);
 		my_free_strtab(prompt);
+		prompt = wait_for_prompt(prompt);
 	}
 	return (0);
 }

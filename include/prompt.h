@@ -8,6 +8,7 @@
 #ifndef __PROMPT_H__
 #define __PROMPT_H__
 
-int	wait_for_prompt(char ***prompt);
+char	**wait_for_prompt(char **prompt);
+char	**prompt_is_valid(char **prompt);
 
 #endif
