@@ -36,6 +36,8 @@ LIB_SRCS	=	str/my_strcmp.c		\
 			strtab/my_strtabdup.c	\
 			strtab/my_strtablen.c	\
 			strtab/my_strtotabpt.c	\
+			strtab/my_strtotab.c	\
+			strtab/my_free_strtab.c	\
 			debug/my_show_word_array.c	\
 			my_putchar.c		\
 			my_putstr.c
@@ -50,10 +52,10 @@ CFLAGS		+=	-I$(HDPATH)
 NAME		=	mysh
 LDFLAGS		=	-L./lib
 LIBFLAG		=	-lmy -lgnl
-SRC		=	src/checking.c
-			
-MAIN		=	src/main.c		\
+SRC		=	src/checking.c		\
 			src/prompt.c
+			
+MAIN		=	src/main.c
 
 OBJ		=	$(SRC:.c=.o)
 OBJ		+=	$(MAIN:.c=.o)
@@ -109,7 +111,7 @@ fclean:	clean
 #	Tests rules
 gdb:	gclean lib
 	$(DBCC) $(CFLAGS) $(LDFLAGS) -o $(GDB_NAME) $(GDB_MAIN) $(SRC)	\
-		$(LDLIBS) $(LIBFLAG)
+		$(LIB_SRC) -lgnl
 
 gclean:
 	$(RM) $(GDB_NAME)

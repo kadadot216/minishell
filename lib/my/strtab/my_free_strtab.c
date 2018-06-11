@@ -6,17 +6,18 @@
 */
 
 #include <stdlib.h>
+#include "strtab.h"
 
-int	my_free_strtab(char **tab, int height)
+int	my_free_strtab(char **tab)
 {
 	int	i = 0;
+	int	height = my_strtablen(tab);
 
 	while (i < height) {
 		free(tab[i]);
 		tab[i] = NULL;
 		i++;
 	}
-	free(tab[i]);
 	free(tab);
 	tab = NULL;
 	if (tab == NULL)

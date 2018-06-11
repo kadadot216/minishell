@@ -13,7 +13,8 @@ char	**my_strtotabpt(char *str, const char *delim);
 char	**my_strtotab(char *str, const char *delim);
 int	my_strtablen(char **tab);
 char	**my_strtabdup(char **tab);
-int	my_free_strtab(char **tab, int height);
+int	my_strtablen(char **tab);
+int	my_free_strtab(char **tab);
 
 #endif
 
