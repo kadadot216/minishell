@@ -7,12 +7,19 @@
 
 #include "my.h"
 #include "main.h"
+#include "prompt.h"
+#include <stdlib.h>
 
-int	main(int ac, char **av)
+int	main(int ac, char **av, char **ae)
 {
 	struct stat	sb;
+	char	**my_env = my_strtabdup(ae);
+	char	*p = NULL;
 
-	if (!check_for_args(ac) || !stat_path(av[1], &sb))
-		return (84);
+	while (wait_for_prompt(&p)) {
+		my_putstr(p);
+		my_putchar('\n');
+	}
+
 	return (0);
 }

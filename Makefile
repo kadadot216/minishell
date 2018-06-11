@@ -29,11 +29,14 @@ LIB_SRCS	=	str/my_strcmp.c		\
 			str/my_strncat.c	\
 			str/my_strncmp.c	\
 			str/my_strncpy.c 	\
+			str/my_strdup.c 	\
 			str/my_memset.c 	\
 			strtab/my_strtabcpy.c	\
 			strtab/my_strtabdup.c	\
 			strtab/my_strtablen.c	\
-			strtab/my_strtotabpt.c
+			strtab/my_strtotabpt.c	\
+			my_putchar.c		\
+			my_putstr.c
 
 LIB_SRC		=	$(addprefix $(LIB_PATH)/, $(LIB_SRCS))
 LIB_OBJ		=	$(LIB_SRC:.c=.o)
@@ -44,10 +47,11 @@ HDPATH		=	./include
 CFLAGS		+=	-I$(HDPATH)
 NAME		=	mysh
 LDFLAGS		=	-L./lib
-LIBFLAG		=	-lmy
+LIBFLAG		=	-lmy -lgnl
 SRC		=	src/checking.c
 			
-MAIN		=	src/main.c
+MAIN		=	src/main.c		\
+			src/prompt.c
 
 OBJ		=	$(SRC:.c=.o)
 OBJ		+=	$(MAIN:.c=.o)
@@ -103,7 +107,7 @@ fclean:	clean
 #	Tests rules
 gdb:	gclean lib
 	$(DBCC) $(CFLAGS) $(LDFLAGS) -o $(GDB_NAME) $(GDB_MAIN) $(SRC)	\
-		$(LIB_SRC) $(LDLIBS) $(LIBFLAG)
+		$(LDLIBS) $(LIBFLAG)
 
 gclean:
 	$(RM) $(GDB_NAME)
