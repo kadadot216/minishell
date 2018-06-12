@@ -21,7 +21,7 @@ void	ms_setenv(char **prompt, char ***env)
 		newvar_len = (my_strlen(prompt[0]) + my_strlen(prompt[1]) + 2);
 		envlen = my_strtablen(*env);
 		envbackup = my_strtabdup(*env);
-		free(*env);
+		my_free_strtab(*env);
 		*env = malloc(sizeof(char *) * (envlen + 2));
 		*env = my_strtabcpy(*env, (const char **) envbackup);
 		my_memset(new_var, '\0', newvar_len);
@@ -31,9 +31,41 @@ void	ms_setenv(char **prompt, char ***env)
 	}
 }
 
+int	my_strlentok(char const *str, char delim)
+{
+	int	i = 0;
+
+	while (str[i] != delim && str[i] != '\0')
+		i++;
+	return (i);
+}
+
 void	ms_unsetenv(char **prompt, char ***env)
 {
+	int	ac = my_strtablen(prompt);
+	int	i = 0;
+	int	j = 0;
+	int	vname_len = my_strlentok(prompt[0], '=');
+	int	envlen = 0;
+	char	**envbackup = NULL;
 
+	if (ac == 2) {
+		envlen = my_strtablen(*env);
+		envbackup = my_strtabdup(*env);
+		my_free_strtab(*env);
+		*env = malloc(sizeof(char *) * envlen);
+		while (my_strncmp(*env[i], prompt[0], vname_len) != 0) {
+			*env[j] = my_strdup(envbackup[i]);
+			i++;
+			j++;
+		}
+		i++;
+		while (*env[i] != NULL) {
+			*env[j] = my_strdup(envbackup[i]);
+			i++;
+			j++;
+		}
+	}
 }
 
 void	ms_cd(char *prompt, char ***env)
