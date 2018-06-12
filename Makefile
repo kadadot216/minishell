@@ -74,7 +74,7 @@ GDB_NAME	=	gdb.out
 
 .PHONY: tclean gclean fclean lclean lfclean $(NAME)
 
-all:	lib
+all:	lib $(NAME)
 
 #	Library rules
 lib:	libh liba
@@ -93,7 +93,7 @@ libfclean: libclean
 	rm -rf $(LIB_DIR)/$(HDPATH)
 	$(RM) $(LIB_DIR)/$(LIB_NAME)
 
-re: libfclean lib
+re: libfclean all
 
 #	Program rules
 #
