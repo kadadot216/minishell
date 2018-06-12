@@ -8,6 +8,6 @@
 #ifndef __GETENV_H__
 #define __GETENV_H__
 
-char	*get_env(char **env, char *var);
+char	*my_getenv(char **env, char *var);
 
 #endif

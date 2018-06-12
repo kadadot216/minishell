@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** cmd.c
+** launch_cmd.c
 ** File description:
 ** Command handling functions
 */
@@ -54,14 +54,16 @@ static void	exec_fork(char *exec_bin, char **prompt, char **env)
 	wait(&pid);
 }
 
-void	launch_cmd(char **prompt, char **env, char **path)
+int	launch_cmd(char **prompt, char **env, char **path)
 {
 	char	*exec_bin = NULL;
 	
 	if (prompt[0][0] != '\0')
 		exec_bin = search_exec(prompt[0], path);
-	if (exec_bin != NULL && !check_builtins(prompt)) {
+	if (exec_bin != NULL) {
 		exec_fork(exec_bin, prompt, env);
 		free(exec_bin);
+		return (1);
 	}
+	return (0);
 }

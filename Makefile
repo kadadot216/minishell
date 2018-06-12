@@ -56,9 +56,9 @@ LDFLAGS		=	-L./lib
 LIBFLAG		=	-lmy -lgnl
 SRC		=	src/checking.c		\
 			src/prompt.c		\
-			src/getenv.c		\
+			src/my_getenv.c		\
 			src/builtins.c		\
-			src/cmd.c
+			src/launch_cmd.c
 			
 MAIN		=	src/main.c
 

@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "my.h"
 
-char	*get_env(char **env, char *var)
+char	*my_getenv(char **env, char *var)
 {
 	int	i = 0;
 	char	*value = NULL;
@@ -23,4 +23,3 @@ char	*get_env(char **env, char *var)
 	}
 	return (0);
 }
-

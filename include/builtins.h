@@ -8,6 +8,8 @@
 #ifndef __BUILTINS_H__
 #define __BUILTINS_H__
 
-int	check_builtins(char **prompt);
+#include "builtins_t.h"
+
+char	**launch_builtins(char **prompt, char **env);
 
 #endif
