@@ -10,7 +10,6 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include "my.h"
-#include "getenv.h"
 
 static char	*get_exec_fp(char const *path_case, char const *exec_prompt)
 {
@@ -43,15 +42,25 @@ static char	*search_exec(char *exec_prompt, char **path)
 	return (NULL);
 }
 
-void	launch_cmd(char **prompt, char **env)
+void	exec_fork(char *exec_bin, char **prompt, char **env)
 {
-	char	**path = my_strtotab(get_env(env, "PATH"), ":");
-	char	*exec_bin = search_exec(prompt[0], path);
 	pid_t	pid = fork();
 
-	if (exec_bin != NULL && pid == 0)
+	if (pid < 0)
+		my_putstr("Forking error");
+	else if (pid == 0)
 		execve(exec_bin, prompt, env);
-	wait(0);
-	free(exec_bin);
-	my_free_strtab(path);
+	wait(&pid);
+}
+
+void	launch_cmd(char **prompt, char **env, char **path)
+{
+	char	*exec_bin = NULL;
+	
+	if (prompt[0][0] != '\0')
+		exec_bin = search_exec(prompt[0], path);
+	if (exec_bin != NULL) {
+		exec_fork(exec_bin, prompt, env);
+		free(exec_bin);
+	}
 }

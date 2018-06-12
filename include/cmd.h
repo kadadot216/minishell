@@ -8,6 +8,6 @@
 #ifndef __CMD_H__
 #define __CMD_H__
 
-void	launch_cmd(char **prompt, char **env);
+void	launch_cmd(char **prompt, char **env, char **path);
 
 #endif
