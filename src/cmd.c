@@ -10,6 +10,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include "my.h"
+#include "builtins.h"
 
 static char	*get_exec_fp(char const *path_case, char const *exec_prompt)
 {
@@ -37,17 +38,17 @@ static char	*search_exec(char *exec_prompt, char **path)
 			i++;
 		}
 	}
-	my_putstr(exec_prompt);
-	my_putstr(": Command not found.\n");
+	my_puterror(exec_prompt);
+	my_puterror(": Command not found.\n");
 	return (NULL);
 }
 
-void	exec_fork(char *exec_bin, char **prompt, char **env)
+static void	exec_fork(char *exec_bin, char **prompt, char **env)
 {
 	pid_t	pid = fork();
 
 	if (pid < 0)
-		my_putstr("Forking error");
+		my_puterror("Forking error\n");
 	else if (pid == 0)
 		execve(exec_bin, prompt, env);
 	wait(&pid);
@@ -59,7 +60,7 @@ void	launch_cmd(char **prompt, char **env, char **path)
 	
 	if (prompt[0][0] != '\0')
 		exec_bin = search_exec(prompt[0], path);
-	if (exec_bin != NULL) {
+	if (exec_bin != NULL && !check_builtins(prompt)) {
 		exec_fork(exec_bin, prompt, env);
 		free(exec_bin);
 	}

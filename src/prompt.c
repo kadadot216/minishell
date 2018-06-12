@@ -25,15 +25,6 @@ char	**prompt_is_valid(char **prompt)
 		return (prompt);
 }
 
-static char	**set_empty_valid_prompt(char *gnl_prompt)
-{
-	char	**prompt = malloc(sizeof(char *));
-
-	prompt[0] = malloc(1);
-	prompt[0][0] = '\0';
-	return (prompt);
-}
-
 static char	**sanitize_prompt(char *gnl_prompt)
 {
 	char	**prompt = NULL;

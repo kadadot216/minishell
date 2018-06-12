@@ -41,6 +41,7 @@ LIB_SRCS	=	str/my_strcmp.c		\
 			strtab/my_free_strtab.c	\
 			debug/my_show_word_array.c	\
 			my_putchar.c		\
+			my_puterror.c		\
 			my_putstr.c
 
 LIB_SRC		=	$(addprefix $(LIB_PATH)/, $(LIB_SRCS))
@@ -56,6 +57,7 @@ LIBFLAG		=	-lmy -lgnl
 SRC		=	src/checking.c		\
 			src/prompt.c		\
 			src/getenv.c		\
+			src/builtins.c		\
 			src/cmd.c
 			
 MAIN		=	src/main.c
