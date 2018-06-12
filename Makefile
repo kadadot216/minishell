@@ -54,7 +54,9 @@ NAME		=	mysh
 LDFLAGS		=	-L./lib
 LIBFLAG		=	-lmy -lgnl
 SRC		=	src/checking.c		\
-			src/prompt.c
+			src/prompt.c		\
+			src/getenv.c		\
+			src/cmd.c
 			
 MAIN		=	src/main.c
 
