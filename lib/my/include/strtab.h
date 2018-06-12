@@ -14,7 +14,7 @@ char	**my_strtotab(char *str, const char *delim);
 int	my_strtablen(char **tab);
 char	**my_strtabdup(char **tab);
 int	my_strtablen(char **tab);
-int	my_free_strtab(char **tab);
+char	**my_free_strtab(char **tab);
 
 #endif
 

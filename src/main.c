@@ -21,7 +21,7 @@ int	main(int ac, char **av, char **ae)
 
 	while (prompt_is_valid(prompt)) {
 		launch_cmd(prompt, env);
-		my_free_strtab(prompt);
+		prompt = my_free_strtab(prompt);
 		prompt = wait_for_prompt(prompt);
 	}
 	return (0);

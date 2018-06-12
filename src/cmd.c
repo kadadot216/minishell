@@ -38,7 +38,8 @@ static char	*search_exec(char *exec_prompt, char **path)
 			i++;
 		}
 	}
-	my_putstr("Command not found.\n");
+	my_putstr(exec_prompt);
+	my_putstr(": Command not found.\n");
 	return (NULL);
 }
 
@@ -54,4 +55,3 @@ void	launch_cmd(char **prompt, char **env)
 	free(exec_bin);
 	my_free_strtab(path);
 }
-

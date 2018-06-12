@@ -93,15 +93,13 @@ libfclean: libclean
 	rm -rf $(LIB_DIR)/$(HDPATH)
 	$(RM) $(LIB_DIR)/$(LIB_NAME)
 
-re: libfclean all
+re: libfclean fclean all
 
 #	Program rules
 #
 
 $(NAME): lib
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $(NAME) $(MAIN) $(SRC) $(LIBFLAG)
-
-re: clean fclean $(NAME)
 
 clean:
 	$(RM) $(OBJ)

@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "strtab.h"
 
-int	my_free_strtab(char **tab)
+char	**my_free_strtab(char **tab)
 {
 	int	i = 0;
 	int	height = my_strtablen(tab);
@@ -20,8 +20,5 @@ int	my_free_strtab(char **tab)
 	}
 	free(tab);
 	tab = NULL;
-	if (tab == NULL)
-		return (1);
-	else
-		return (0);
+	return (tab);
 }
