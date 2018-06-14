@@ -11,10 +11,27 @@
 #include "shell/path_cmd.h"
 #include "shell/prompt_type.h"
 
+int	get_fct_idx_from_pcmd(builtins_cmd_t *builtins, pcmd_t pcmd)
+{
+	int	cur_idx = 0;
+
+	while (cur_idx < IDX_PCMD_EOL) {
+		if (pcmd == builtins[cur_idx].pcmd)
+			return (builtins[cur_idx].pcmd_idx);
+		cur_idx++;
+	}
+	return (-1);
+}
+
 void	launch_builtin_cmd(builtins_cmd_t *builtins, shell_t *shell)
 {
-	my_putstr("This is ");
-	my_putstr(builtins[0].cmd_name);
+	int	fct_idx = get_fct_idx_from_pcmd(builtins, shell->pcmd_f);
+
+	if (!(fct_idx < 0)) {
+		my_putstr("This is ");
+		my_putstr(builtins[fct_idx].cmd_name);
+		my_putchar('\n');
+	}
 }
 
 void	dispatch_command(builtins_cmd_t *builtins, shell_t *shell)

@@ -23,7 +23,7 @@ pcmd_t	get_cmd_type(builtins_cmd_t *builtins, char *cmd)
 	}
 	while (cur_idx < IDX_PCMD_EOL) {
 		if (my_strcmp(builtins[cur_idx].cmd_name, cmd) == 0) {
-			return (builtins->pcmd);
+			return (builtins[cur_idx].pcmd);
 		}
 		cur_idx++;
 	}
