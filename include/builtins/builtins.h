@@ -22,5 +22,6 @@ char	**launch_builtins(char **prompt, char **env);
 builtins_cmd_t	*get_builtins_cmd_table(void);
 pcmd_t	check_prompt_from_builtins(builtins_cmd_t *builtins, char **prompt);
 builtins_cmd_t	*clear_builtins(builtins_cmd_t *builtins);
+int	get_fct_idx_from_pcmd(builtins_cmd_t *builtins, pcmd_t pcmd);
 
 #endif

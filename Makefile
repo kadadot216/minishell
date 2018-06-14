@@ -58,7 +58,11 @@ SRC		=	src/shell/prompt.c		\
 			src/shell/shell.c		\
 			src/shell/cmd_dispatcher.c	\
 			src/env/env.c			\
-			src/builtins/builtins.c	
+			src/builtins/builtins_table.c	\
+			src/builtins/ms_cd.c		\
+			src/builtins/ms_setenv.c	\
+			src/builtins/ms_unsetenv.c	\
+			src/builtins/ms_exit.c	
 			
 MAIN		=	src/main.c
 
