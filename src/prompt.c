@@ -10,17 +10,10 @@
 #include "prompt.h"
 #include <stdlib.h>
 
-char	*gnl_is_valid(char *str)
-{
-	if (str == NULL || my_strcmp(str, "\0") == 0)
-		return (NULL);
-	else
-		return (str);
-}
-
 void		remove_empty_prompt(prompt_t prompt)
 {
 	free(prompt);
+	prompt = NULL;
 }
 
 prompt_t	set_empty_prompt(void)
@@ -33,19 +26,14 @@ prompt_t	set_empty_prompt(void)
 	return (empty);
 }
 
-int	is_prompt_valid(prompt_t prompt)
+int		is_prompt_unallocated(prompt_t prompt)
 {
 	return (prompt != NULL);
 }
 
-int	is_prompt_invalid(prompt_t prompt)
+int		is_prompt_empty(prompt_t prompt)
 {
-	return (prompt == NULL);
-}
-
-int	is_prompt_empty(prompt_t prompt)
-{
-	if (is_prompt_invalid(prompt)) {
+	if (!is_prompt_unallocated(prompt)) {
 		return (0);
 	} else if (prompt->args == NULL && prompt->cmd == NULL) {
 		return (1);
@@ -84,7 +72,7 @@ prompt_t	wait_for_prompt(void)
 	my_putstr("$>");
 	gnl_prompt = get_next_line(0);
 	prompt = set_prompt(gnl_prompt);
-	if (is_prompt_invalid(prompt)) {
+	if (!is_prompt_unallocated(prompt)) {
 		return (NULL);
 	} else {
 		return (prompt);

@@ -9,10 +9,13 @@
 #define __SHELL_H__
 
 #include "prompt.h"
+#include "env.h"
+
+typedef char* path;
 
 typedef struct	shell_s {
-	char		**env;
-	char		**path;
+	path		*paths;
+	env_t		env;
 	prompt_t	prompt;
 } *shell_t;
 

@@ -13,10 +13,13 @@
 #include "builtins.h"
 #include "getenv.h"
 
+#include "shell.h"
+
 #include "debug.h"
 
 int	main(int ac, char **av, char **ae)
 {
+	shell_t	shell = init_shell();
 	char	**env = my_strtabdup(ae);
 	char	**path = my_strtotab(my_getenv(env, "PATH"), ":");
 	char	**prompt = wait_for_prompt(prompt);
