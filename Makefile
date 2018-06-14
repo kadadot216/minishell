@@ -23,23 +23,26 @@ LIB_HDSRC	=	my.h		\
 
 LIB_HDS		=	$(addprefix $(LIB_HDPATH)/, $(LIB_HDSRC))
 
-LIB_SRCS	=	str/my_strcmp.c		\
-			str/my_strcpy.c		\
-			str/my_strlen.c		\
-			str/my_strncat.c	\
-			str/my_strncmp.c	\
-			str/my_strncpy.c 	\
-			str/my_strdup.c 	\
-			str/my_memset.c 	\
-			str/my_strcat.c 	\
-			strtab/my_strtabcpy.c	\
-			strtab/my_strtabdup.c	\
-			strtab/my_strtablen.c	\
-			strtab/my_strtotabpt.c	\
-			strtab/my_strtotab.c	\
-			strtab/my_free_strtab.c	\
-			my_putchar.c		\
-			my_puterror.c		\
+LIB_SRCS	=	str/my_strcmp.c			\
+			str/my_strcpy.c			\
+			str/my_strlen.c			\
+			str/my_strncat.c		\
+			str/my_strncmp.c		\
+			str/my_strncpy.c 		\
+			str/my_strdup.c 		\
+			str/my_memset.c 		\
+			str/my_strcat.c 		\
+			strtab/my_strtabcpy.c		\
+			strtab/my_strtabdup.c		\
+			strtab/my_strtablen.c		\
+			strtab/my_strtotabpt.c		\
+			strtab/my_strtotab.c		\
+			strtab/my_free_strtab.c		\
+			strtab/my_strtab_null.c		\
+			strtab/my_strtab_realloc.c	\
+			strtab/my_strtab_nclone.c	\
+			my_putchar.c			\
+			my_puterror.c			\
 			my_putstr.c
 
 LIB_SRC		=	$(addprefix $(LIB_PATH)/, $(LIB_SRCS))

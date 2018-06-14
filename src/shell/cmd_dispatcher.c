@@ -16,9 +16,7 @@ void	launch_builtin_cmd(builtins_cmd_t *builtins, shell_t *shell)
 	int	fct_idx = get_fct_idx_from_pcmd(builtins, shell->pcmd_f);
 
 	if (!(fct_idx < 0)) {
-		my_putstr("This is ");
-		my_putstr(builtins[fct_idx].cmd_name);
-		my_putchar('\n');
+		builtins[fct_idx].cmd_fct(shell);
 	}
 }
 

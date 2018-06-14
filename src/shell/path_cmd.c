@@ -24,7 +24,7 @@ static char	*get_exec_fp(char const *path, char const *exec_prompt)
 	return (exec_fp);
 }
 
-static char	*search_exec(char *exec_prompt, path_t *paths)
+char	*search_exec(char *exec_prompt, path_t *paths)
 {
 	int	i = 0;
 	char	*exec_fp = NULL;
@@ -43,7 +43,7 @@ static char	*search_exec(char *exec_prompt, path_t *paths)
 	return (NULL);
 }
 
-static void	exec_fork(char *exec_bin, char **prompt, char **env)
+void	exec_fork(char *exec_bin, char **prompt, char **env)
 {
 	pid_t	pid = fork();
 

@@ -15,6 +15,9 @@ int	my_strtablen(char **tab);
 char	**my_strtabdup(char **tab);
 int	my_strtablen(char **tab);
 char	**my_free_strtab(char **tab);
+char	**my_strtab_null(char **tab, int height);
+char	**my_strtab_realloc(char **tab, int size);
+char	**my_strtab_nclone(char **dest, char *const *src, int n);
 
 #endif
 

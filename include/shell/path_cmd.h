@@ -11,6 +11,8 @@
 #include "shell/shell.h"
 
 void	launch_path_cmd(shell_t *shell);
+char	*search_exec(char *exec_prompt, path_t *paths);
+void	exec_fork(char *exec_bin, char **prompt, char **env);
 
 #endif
 
