@@ -15,7 +15,7 @@ char	*get_env_entry(char **env, char *key)
 	char	*value = NULL;
 
 	if (!key_end)
-		return (0);
+		return (NULL);
 	while (env[i] != NULL) {
 		if (my_strncmp(key, env[i], key_end) == 0) {
 			value = env[i];
@@ -24,5 +24,5 @@ char	*get_env_entry(char **env, char *key)
 		}
 		i++;
 	}
-	return (0);
+	return (NULL);
 }

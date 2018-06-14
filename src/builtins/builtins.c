@@ -30,38 +30,3 @@ void	ms_setenv(char **prompt, char ***env)
 		my_strcat(new_var, prompt[1]);
 	}
 }
-
-void	ms_unsetenv(char **prompt, char ***env)
-{
-
-}
-
-void	ms_cd(char *prompt, char ***env)
-{
-
-}
-
-void	ms_exit(void)
-{
-	exit(0);
-}
-
-builtins_cmd_t	*init_builtins_cmds(void)
-{
-	builtins_cmd_t	builtins_cmds[4] = {
-		{"setenv", &ms_setenv},
-		{"unsetenv", &ms_unsetenv},
-		{"cd", &ms_cd},
-		{"cd", &ms_exit},
-	};
-	builtins_cmd_t	*builtins_cmd_ptr = builtins_cmds;
-
-	return (builtins_cmd_ptr);
-}
-
-
-char	**launch_builtins(char **prompt, char **env)
-{
-	builtins_cmd_t	*builtins_cmds = init_builtins_cmds();
-	return (env);
-}

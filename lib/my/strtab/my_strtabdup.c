@@ -12,8 +12,11 @@
 char	**my_strtabdup(char **tab)
 {
 	char	**dest = NULL;
-	int	i = my_strtablen(tab);
-
+	int	i = 0;
+	
+	if (tab == NULL)
+		return (NULL);
+	i = my_strtablen(tab);
 	dest = malloc(sizeof(char *) * (i + 1));
 	i = 0;
 	while (tab[i] != 0) {

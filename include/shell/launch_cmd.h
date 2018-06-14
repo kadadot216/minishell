@@ -10,6 +10,6 @@
 
 #include "shell.h"
 
-int	launch_cmd(shell_t shell);
+void	dispatch_command(shell_t *shell);
 
 #endif
