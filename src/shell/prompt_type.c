@@ -7,7 +7,7 @@
 
 #include <stdlib.h>
 #include "my.h"
-#include "shell/shell.h"
+#include "builtins/builtins.h"
 
 int	is_a_builtin(pcmd_t pcmd)
 {
@@ -16,16 +16,21 @@ int	is_a_builtin(pcmd_t pcmd)
 
 pcmd_t	get_cmd_type(char *cmd)
 {
-	if (my_strcmp(cmd, "exit") == 0)
-		return (CMD_EXIT);
-	if (my_strcmp(cmd, "setenv") == 0)
-		return (CMD_SETENV);
-	if (my_strcmp(cmd, "unsetenv") == 0)
-		return (CMD_UNSETENV);
-	if (my_strcmp(cmd, "cd") == 0)
-		return (CMD_CD);
-	else
-		return (CMD_PATH);
+	int		cur_idx = 0;
+	builtins_cmd_t	*builtins_cmds = NULL;
+
+	builtins_cmds = get_builtins_cmd_table();
+	if (!builtins_cmds) {
+		// Error msg
+		return (NUL);
+	}
+	while (cur_idx < IDX_EOL) {
+		if (my_strcmp(builtins_cmds[cur_idx].cmd_name, cmd) == 0) {
+			return (builtins_cmds->pcmd);
+		}
+		cur_idx++;
+	}
+	return (CMD_EXEC);
 }
 
 pcmd_t	reset_prompt_type(void)
