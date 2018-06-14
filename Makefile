@@ -18,8 +18,7 @@ LIB_HDPATH	=	$(LIB_PATH)/include
 
 LIB_HDSRC	=	my.h		\
 			str.h		\
-			strtab.h	\
-			debug.h
+			strtab.h
 			
 
 LIB_HDS		=	$(addprefix $(LIB_HDPATH)/, $(LIB_HDSRC))
@@ -39,7 +38,6 @@ LIB_SRCS	=	str/my_strcmp.c		\
 			strtab/my_strtotabpt.c	\
 			strtab/my_strtotab.c	\
 			strtab/my_free_strtab.c	\
-			debug/my_show_word_array.c	\
 			my_putchar.c		\
 			my_puterror.c		\
 			my_putstr.c
@@ -55,8 +53,10 @@ NAME		=	mysh
 LDFLAGS		=	-L./lib
 LIBFLAG		=	-lmy -lgnl
 SRC		=	src/shell/prompt.c		\
+			src/shell/prompt_type.c		\
+			src/shell/path_cmd.c		\
 			src/shell/shell.c		\
-			src/shell/launch_cmd.c		\
+			src/shell/cmd_dispatcher.c	\
 			src/env/env.c			\
 			src/builtins/builtins.c	
 			

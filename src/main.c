@@ -7,15 +7,11 @@
 
 #include <stdlib.h>
 #include "my.h"
-#include "main.h"
+#include "shell/shell.h"
 #include "shell/prompt.h"
 #include "shell/launch_cmd.h"
 #include "builtins/builtins.h"
 #include "env/getenv.h"
-
-#include "debug.h"
-
-#include "shell/shell.h"
 
 int	main(int ac, char **av, char **ae)
 {
