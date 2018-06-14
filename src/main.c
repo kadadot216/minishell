@@ -17,12 +17,11 @@
 
 int	main(int ac, char **av, char **ae)
 {
-	struct stat	sb;
 	char	**env = my_strtabdup(ae);
 	char	**path = my_strtotab(my_getenv(env, "PATH"), ":");
 	char	**prompt = wait_for_prompt(prompt);
 
-	while (prompt_is_valid(prompt)) {
+	while (is_prompt_valid(prompt)) {
 		if (!launch_cmd(prompt, env, path))
 			env = launch_builtins(prompt, env);
 		prompt = my_free_strtab(prompt);

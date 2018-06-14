@@ -7,6 +7,7 @@
 
 #include "my.h"
 #include "gnl.h"
+#include "prompt.h"
 #include <stdlib.h>
 
 char	*gnl_is_valid(char *str)
@@ -17,32 +18,75 @@ char	*gnl_is_valid(char *str)
 		return (str);
 }
 
-char	**prompt_is_valid(char **prompt)
+void		remove_empty_prompt(prompt_t prompt)
 {
-	if (prompt == NULL)
-		return (NULL);
-	else
-		return (prompt);
+	free(prompt);
 }
 
-static char	**sanitize_prompt(char *gnl_prompt)
+prompt_t	set_empty_prompt(void)
 {
-	char	**prompt = NULL;
+	prompt_t	empty = NULL;
 
-	if (gnl_prompt == NULL) {
-		return (NULL);
+	empty = malloc(sizeof(prompt_t));
+	empty->cmd = NULL;
+	empty->args = NULL;
+	return (empty);
+}
+
+int	is_prompt_valid(prompt_t prompt)
+{
+	return (prompt != NULL);
+}
+
+int	is_prompt_invalid(prompt_t prompt)
+{
+	return (prompt == NULL);
+}
+
+int	is_prompt_empty(prompt_t prompt)
+{
+	if (is_prompt_invalid(prompt)) {
+		return (0);
+	} else if (prompt->args == NULL && prompt->cmd == NULL) {
+		return (1);
 	} else {
-		prompt = my_strtotab(gnl_prompt, " ");
-		return (prompt);
+		return (0);
 	}
 }
 
-char	**wait_for_prompt(char **prompt)
+/* Setup a prompt_t structure and fill it from input
+ * returns NULL if fail
+ */
+prompt_t	set_prompt(char	*input)
 {
-	char	*gnl_prompt = NULL;
+	prompt_t	prompt = set_empty_prompt();
+	char		**promptab = NULL;
+	unsigned int	promptablen = 0;
+
+	promptab = my_strtotab(input, " ");
+	if (!promptab) {
+		remove_empty_prompt(prompt);
+		return (NULL);
+	} 
+	prompt->cmd = promptab[0];
+	promptablen = my_strtablen(promptab);
+	if (promptablen > 1) {
+		prompt->args = my_strtabdup(&promptab[1]);
+	}
+	return (prompt);
+}
+
+prompt_t	wait_for_prompt(void)
+{
+	char		*gnl_prompt = NULL;
+	prompt_t	prompt = NULL;
 
 	my_putstr("$>");
 	gnl_prompt = get_next_line(0);
-	prompt = sanitize_prompt(gnl_prompt);
-	return (prompt);
+	prompt = set_prompt(gnl_prompt);
+	if (is_prompt_invalid(prompt)) {
+		return (NULL);
+	} else {
+		return (prompt);
+	}
 }
