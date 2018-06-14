@@ -9,7 +9,8 @@
 #define __LAUNCH_CMD_H__
 
 #include "shell.h"
+#include "builtins/builtins.h"
 
-void	dispatch_command(shell_t *shell);
+void	dispatch_command(builtins_cmd_t *builtins, shell_t *shell);
 
 #endif

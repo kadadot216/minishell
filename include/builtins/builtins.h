@@ -20,5 +20,7 @@ typedef struct	builtins_cmd_s {
 
 char	**launch_builtins(char **prompt, char **env);
 builtins_cmd_t	*get_builtins_cmd_table(void);
+pcmd_t	check_prompt_from_builtins(builtins_cmd_t *builtins, char **prompt);
+builtins_cmd_t	*clear_builtins(builtins_cmd_t *builtins);
 
 #endif

@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2018
-** prompt_check.h
+** prompt_type.h
 ** File description:
-** Header file for prompt_check.c
+** Prompt checking function prototypes and data structures
 */
 
 #ifndef __PROMPT_CHECK_H__
@@ -19,18 +19,14 @@ typedef enum	pcmd_e {
 } pcmd_t;
 
 typedef enum	pcmd_idx_e {
-	IDX_NUL = -1,
-	IDX_CR = -1,
-	IDX_CMD_EXEC = -1,
 	IDX_CMD_SETENV,
 	IDX_CMD_UNSETENV,
 	IDX_CMD_CD,
 	IDX_CMD_EXIT,
-	IDX_EOL
+	IDX_PCMD_EOL
 } pcmd_idx_t;
 
 int	is_a_builtin(pcmd_t pcmd);
-pcmd_t	check_prompt_type(char **prompt);
 pcmd_t	reset_prompt_type(void);
 
 #endif

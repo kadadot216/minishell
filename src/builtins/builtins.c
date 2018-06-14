@@ -46,6 +46,36 @@ void	ms_setenv(shell_t *shell)
 	}
 }
 
+builtins_cmd_t	clear_builtin(builtins_cmd_t *builtin)
+{
+	builtin->pcmd_idx = 0;
+	builtin->pcmd = 0;
+	free(builtin->cmd_name);
+	builtin->cmd_fct = NULL;
+	return (*builtin);
+}
+
+builtins_cmd_t	*clear_builtins(builtins_cmd_t *builtins)
+{
+	int	idx = 0;
+
+	while (idx < IDX_PCMD_EOL) {
+		builtins[idx] = clear_builtin(&builtins[idx]);
+		idx++;
+	}
+	return (builtins);
+}
+
+builtins_cmd_t	map_builtin(builtins_cmd_t src)
+{
+	builtins_cmd_t	dest;
+	dest.pcmd_idx = src.pcmd_idx;
+	dest.pcmd = src.pcmd;
+	dest.cmd_name = my_strdup(src.cmd_name);
+	dest.cmd_fct = src.cmd_fct;
+	return (dest);
+}
+
 builtins_cmd_t	*get_builtins_cmd_table(void)
 {
 	builtins_cmd_t *cmd_table = NULL;
@@ -55,7 +85,13 @@ builtins_cmd_t	*get_builtins_cmd_table(void)
 		{IDX_CMD_CD, CMD_CD, "cd", &ms_cd},
 		{IDX_CMD_EXIT, CMD_EXIT, "exit", &ms_exit},
 	};
+	int	idx = 0;
 
-	cmd_table = BUILTINS_CMD_LIST;
+	cmd_table = malloc(sizeof(builtins_cmd_t) * IDX_PCMD_EOL);
+
+	while (idx < IDX_PCMD_EOL) {
+		cmd_table[idx] = map_builtin(BUILTINS_CMD_LIST[idx]);
+		idx++;
+	}
 	return (cmd_table);
 }
