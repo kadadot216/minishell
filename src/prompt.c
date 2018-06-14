@@ -64,6 +64,15 @@ prompt_t	set_prompt(char	*input)
 	return (prompt);
 }
 
+prompt_t	unset_prompt(prompt_t prompt)
+{
+	prompt->args = my_free_strtab(prompt->args);
+	free(prompt->cmd);
+	prompt->cmd = NULL;
+	free(prompt);
+	return (NULL);
+}
+
 prompt_t	wait_for_prompt(void)
 {
 	char		*gnl_prompt = NULL;

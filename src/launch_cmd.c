@@ -10,6 +10,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include "my.h"
+#include "shell.h"
 #include "builtins.h"
 
 static char	*get_exec_fp(char const *path_case, char const *exec_prompt)
@@ -54,14 +55,14 @@ static void	exec_fork(char *exec_bin, char **prompt, char **env)
 	wait(&pid);
 }
 
-int	launch_cmd(char **prompt, char **env, char **path)
+int	launch_cmd(shell_t shell)
 {
 	char	*exec_bin = NULL;
 	
-	if (prompt[0][0] != '\0')
-		exec_bin = search_exec(prompt[0], path);
+	if (shell->prompt->cmd[0] != '\0')
+		exec_bin = search_exec(shell->prompt->cmd, shell->path);
 	if (exec_bin != NULL) {
-		exec_fork(exec_bin, prompt, env);
+		exec_fork(exec_bin, shell->prompt, shell->env);
 		free(exec_bin);
 		return (1);
 	}

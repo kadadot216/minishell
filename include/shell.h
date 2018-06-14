@@ -11,11 +11,11 @@
 #include "prompt.h"
 #include "env.h"
 
-typedef char* path;
+typedef char*	path_t;
 
 typedef struct	shell_s {
-	path		*paths;
-	env_t		env;
+	path_t		*paths;
+	char		**env;
 	prompt_t	prompt;
 } *shell_t;
 

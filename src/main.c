@@ -20,17 +20,14 @@
 int	main(int ac, char **av, char **ae)
 {
 	shell_t	shell = init_shell();
-	char	**env = my_strtabdup(ae);
-	char	**path = my_strtotab(my_getenv(env, "PATH"), ":");
-	char	**prompt = wait_for_prompt(prompt);
+	shell->prompt = wait_for_prompt(prompt);
 
-	while (is_prompt_valid(prompt)) {
-		if (!launch_cmd(prompt, env, path))
-			env = launch_builtins(prompt, env);
-		prompt = my_free_strtab(prompt);
-		prompt = wait_for_prompt(prompt);
+	while (is_prompt_valid(shell->prompt)) {
+		if (!launch_cmd(shell))
+			env = launch_builtins(shell);
+		shell->prompt = unset_prompt(shell->prompt);
+		shell->prompt = wait_for_prompt(shell->prompt);
 	}
-	my_free_strtab(path);
-	my_free_strtab(env);
+	shell = unset_shell(shell);
 	return (0);
 }
