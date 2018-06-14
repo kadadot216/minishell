@@ -18,7 +18,7 @@ int	main(int ac, char **av, char **ae)
 	shell_t	*shell = setup_shell(ae);
 	shell->prompt = wait_for_prompt();
 
-	while (is_prompt_allocated(shell->prompt) && shell->pcmd == NUL) {
+	while (is_prompt_allocated(shell->prompt)) {
 		dispatch_command(shell);
 		shell->prompt = my_free_strtab(shell->prompt);
 		shell->prompt = wait_for_prompt();

@@ -9,12 +9,12 @@
 #include "my.h"
 #include "shell/shell.h"
 
-int	is_a_builtin(prompt_cmd_t pcmd)
+int	is_a_builtin(pcmd_t pcmd)
 {
 	return (pcmd & (CMD_EXIT ^ CMD_SETENV ^ CMD_UNSETENV ^ CMD_CD));
 }
 
-prompt_cmd_t	get_cmd_type(char *cmd)
+pcmd_t	get_cmd_type(char *cmd)
 {
 	if (my_strcmp(cmd, "exit") == 0)
 		return (CMD_EXIT);
@@ -28,12 +28,12 @@ prompt_cmd_t	get_cmd_type(char *cmd)
 		return (CMD_PATH);
 }
 
-prompt_cmd_t	reset_prompt_type(void)
+pcmd_t	reset_prompt_type(void)
 {
 	return (NUL);
 }
 
-prompt_cmd_t	check_prompt_type(char **prompt)
+pcmd_t	check_prompt_type(char **prompt)
 {
 	char	*cmd = NULL;
 

@@ -30,7 +30,7 @@ shell_t	*unset_shell(shell_t *shell)
 {
 	shell->env = my_free_strtab(shell->env);
 	shell->prompt = my_free_strtab(shell->prompt);
-	shell->pcmd = NUL;
+	shell->pcmd_f = NUL;
 	if (is_shell_empty(shell)) {
 		return (NULL);
 	} else {
@@ -47,7 +47,7 @@ shell_t	*set_empty_shell(void)
 	shell->env = NULL;
 	shell->paths = NULL;
 	shell->prompt = NULL;
-	shell->pcmd = NUL;
+	shell->pcmd_f = NUL;
 	return (shell);
 }
 

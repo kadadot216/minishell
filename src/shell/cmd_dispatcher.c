@@ -17,11 +17,11 @@ void	launch_builtin_cmd(shell_t *shell)
 
 void	dispatch_command(shell_t *shell)
 {
-	shell->pcmd = check_prompt_type(shell->prompt);
-	if (shell->pcmd == CMD_PATH)
+	shell->pcmd_f = check_prompt_type(shell->prompt);
+	if (shell->pcmd_f == CMD_PATH)
 		launch_path_cmd(shell);
-	if (is_a_builtin(shell->pcmd)) {
+	if (is_a_builtin(shell->pcmd_f)) {
 		launch_builtin_cmd(shell);
 	}
-	shell->pcmd = reset_prompt_type();
+	shell->pcmd_f = reset_prompt_type();
 }

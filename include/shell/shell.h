@@ -13,10 +13,10 @@
 typedef char*	path_t;
 
 typedef struct	shell_s {
-	path_t		*paths;
-	char		**env;
-	char		**prompt;
-	prompt_cmd_t	pcmd;
+	path_t	*paths;
+	char	**env;
+	char	**prompt;
+	pcmd_t	pcmd_f;
 } shell_t;
 
 shell_t	*unset_shell(shell_t *shell);

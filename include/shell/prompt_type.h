@@ -8,7 +8,7 @@
 #ifndef __PROMPT_CHECK_H__
 #define __PROMPT_CHECK_H__
 
-typedef enum	prompt_cmd_e {
+typedef enum	pcmd_e {
 	NUL = 0,
 	CR = 1,
 	CMD_SETENV = 2,
@@ -16,10 +16,20 @@ typedef enum	prompt_cmd_e {
 	CMD_EXIT = 8,
 	CMD_CD = 16,
 	CMD_PATH = 32,
-} prompt_cmd_t;
+} pcmd_t;
 
-int		is_a_builtin(prompt_cmd_t pcmd);
-prompt_cmd_t	check_prompt_type(char **prompt);
-prompt_cmd_t	reset_prompt_type(void);
+typedef enum	pcmd_idx_e {
+	IDX_NUL,
+	IDX_CR,
+	IDX_CMD_SETENV,
+	IDX_CMD_UNSETENV,
+	IDX_CMD_EXIT,
+	IDX_CMD_CD,
+	IDX_CMD_PATH
+} pcmd_idx_t;
+
+int	is_a_builtin(pcmd_t pcmd);
+pcmd_t	check_prompt_type(char **prompt);
+pcmd_t	reset_prompt_type(void);
 
 #endif
