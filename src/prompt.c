@@ -26,14 +26,14 @@ prompt_t	set_empty_prompt(void)
 	return (empty);
 }
 
-int		is_prompt_unallocated(prompt_t prompt)
+int		is_prompt_allocated(prompt_t prompt)
 {
 	return (prompt != NULL);
 }
 
 int		is_prompt_empty(prompt_t prompt)
 {
-	if (!is_prompt_unallocated(prompt)) {
+	if (!is_prompt_allocated(prompt)) {
 		return (0);
 	} else if (prompt->args == NULL && prompt->cmd == NULL) {
 		return (1);
@@ -72,7 +72,7 @@ prompt_t	wait_for_prompt(void)
 	my_putstr("$>");
 	gnl_prompt = get_next_line(0);
 	prompt = set_prompt(gnl_prompt);
-	if (!is_prompt_unallocated(prompt)) {
+	if (!is_prompt_allocated(prompt)) {
 		return (NULL);
 	} else {
 		return (prompt);

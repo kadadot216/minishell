@@ -39,7 +39,6 @@ LIB_SRCS	=	str/my_strcmp.c		\
 			strtab/my_strtotabpt.c	\
 			strtab/my_strtotab.c	\
 			strtab/my_free_strtab.c	\
-			strtab/my_my_strtab_isempty.c	\
 			debug/my_show_word_array.c	\
 			my_putchar.c		\
 			my_puterror.c		\
