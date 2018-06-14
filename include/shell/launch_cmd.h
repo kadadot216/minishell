@@ -8,6 +8,8 @@
 #ifndef __LAUNCH_CMD_H__
 #define __LAUNCH_CMD_H__
 
-int	launch_cmd(char **prompt, char **env, char **path);
+#include "shell.h"
+
+int	launch_cmd(shell_t shell);
 
 #endif

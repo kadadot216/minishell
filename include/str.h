@@ -12,7 +12,6 @@ void	my_memset(char *str, char c, unsigned int size);
 int	my_strcmp(char const *s1, char const *s2);
 char	*my_strcpy(char *dest, char const *src);
 char	*my_strdup(char const *src);
-char	*my_strndup(char const *src, int n);
 int	my_strlen(char const *str);
 char	*my_strncat(char *dest, char const *src, int nb);
 int	my_strncmp(char const *s1, char const *s2, int n);

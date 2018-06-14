@@ -54,11 +54,11 @@ CFLAGS		+=	-I$(HDPATH)
 NAME		=	mysh
 LDFLAGS		=	-L./lib
 LIBFLAG		=	-lmy -lgnl
-SRC		=	src/checking.c		\
-			src/prompt.c		\
-			src/my_getenv.c		\
-			src/builtins.c		\
-			src/launch_cmd.c
+SRC		=	src/shell/prompt.c		\
+			src/shell/shell.c		\
+			src/shell/launch_cmd.c		\
+			src/env/env.c			\
+			src/builtins/builtins.c	
 			
 MAIN		=	src/main.c
 

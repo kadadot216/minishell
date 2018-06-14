@@ -11,8 +11,11 @@
 char	**my_free_strtab(char **tab)
 {
 	int	i = 0;
-	int	height = my_strtablen(tab);
+	int	height = 0;
 
+	if (tab == NULL)
+		return (NULL);
+	height = my_strtablen(tab);
 	while (i < height) {
 		free(tab[i]);
 		tab[i] = NULL;

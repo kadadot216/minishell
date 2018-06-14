@@ -6,8 +6,9 @@
 */
 
 #include <stdlib.h>
-#include "shell.h"
+#include "shell/shell.h"
 #include "strtab.h"
+#include "env/getenv.h"
 
 int	is_shell_allocated(shell_t shell)
 {
@@ -25,10 +26,10 @@ int	is_shell_empty(shell_t shell)
 	}
 }
 
-shell	unset_shell(shell_t shell)
+shell_t	unset_shell(shell_t shell)
 {
 	shell->env = my_free_strtab(shell->env);
-	shell->prompt = unset_prompt(shell->prompt);
+	shell->prompt = my_free_strtab(shell->prompt);
 	if (is_shell_empty(shell)) {
 		return (NULL);
 	} else {
@@ -59,6 +60,6 @@ shell_t	setup_shell(char **ae)
 	}
 	shell->env = my_strtabdup(ae);
 	shell->paths = my_strtotab(get_env_entry(shell->env, "PATH"), ":");
-	shell->prompt = set_empty_prompt();
+	shell->prompt = NULL;
 	return (shell);
 }

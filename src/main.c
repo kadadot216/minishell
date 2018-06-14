@@ -8,26 +8,26 @@
 #include <stdlib.h>
 #include "my.h"
 #include "main.h"
-#include "prompt.h"
-#include "launch_cmd.h"
-#include "builtins.h"
-#include "getenv.h"
-
-#include "shell.h"
+#include "shell/prompt.h"
+#include "shell/launch_cmd.h"
+#include "builtins/builtins.h"
+#include "env/getenv.h"
 
 #include "debug.h"
 
+#include "shell/shell.h"
+
 int	main(int ac, char **av, char **ae)
 {
-	shell_t	shell = init_shell();
-	shell->prompt = wait_for_prompt(prompt);
+	shell_t	shell = setup_shell(ae);
+	shell->prompt = wait_for_prompt();
 
-	while (is_prompt_valid(shell->prompt)) {
+	while (is_prompt_allocated(shell->prompt)) {
 		if (!launch_cmd(shell))
-			env = launch_builtins(shell);
-		shell->prompt = unset_prompt(shell->prompt);
-		shell->prompt = wait_for_prompt(shell->prompt);
+			//env = launch_builtins(shell);
+		shell->prompt = my_free_strtab(shell->prompt);
+		shell->prompt = wait_for_prompt();
 	}
-	shell = unset_shell(shell);
+	unset_shell(shell);
 	return (0);
 }
