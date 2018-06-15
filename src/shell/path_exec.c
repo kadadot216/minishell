@@ -24,14 +24,19 @@ static char	*get_exec_fp(char const *path, char const *exec_prompt)
 	return (exec_fp);
 }
 
-char	*search_exec(char *exec_prompt, path_t *paths)
+static int	can_access_command(char *cmd)
+{
+	return ((access(cmd, F_OK) == 0) && (access(cmd, X_OK) == 0));
+}
+
+static char	*search_exec_from_path(char *exec_prompt, path_t *paths)
 {
 	int	i = 0;
 	char	*exec_fp = NULL;
 
 	while (paths != NULL && paths[i] != NULL) {
 		exec_fp = get_exec_fp(paths[i], exec_prompt);
-		if (access(exec_fp, F_OK) == 0 && access(exec_fp, X_OK) == 0)
+		if (can_access_command(exec_fp))
 			return (exec_fp);
 		else {
 			free(exec_fp);
@@ -43,7 +48,7 @@ char	*search_exec(char *exec_prompt, path_t *paths)
 	return (NULL);
 }
 
-void	exec_fork(char *exec_bin, char **prompt, char **env)
+static void	exec_fork(char *exec_bin, char **prompt, char **env)
 {
 	pid_t	pid = fork();
 
@@ -56,10 +61,17 @@ void	exec_fork(char *exec_bin, char **prompt, char **env)
 
 void	launch_path_cmd(shell_t *shell)
 {
+	char	*cmd = shell->prompt[0];
 	char	*exec_bin = NULL;
 
-	exec_bin = search_exec(shell->prompt[0], shell->paths);
+	if (can_access_command(cmd)) {
+		exec_fork(cmd, shell->prompt, shell->env);
+	}
+	else {
+		exec_bin = search_exec_from_path(cmd, shell->paths);
+	}
 	if (exec_bin != NULL) {
+		cmd = NULL;
 		exec_fork(exec_bin, shell->prompt, shell->env);
 		free(exec_bin);
 	}
