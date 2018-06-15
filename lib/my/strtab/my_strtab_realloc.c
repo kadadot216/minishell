@@ -14,7 +14,7 @@ char	**my_strtab_realloc(char **env, int size)
 		return (NULL);
 	}
 	env = my_free_strtab(env);
-	env = malloc(size + 1);
+	env = malloc(sizeof(char *) * (size + 1));
 	env = my_strtab_null(env, (size + 1));
 	return (env);
 }

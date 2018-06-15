@@ -13,16 +13,15 @@
 
 char	*create_path_entry(char *key, char *value)
 {
-	int	key_end = 0;
-	int	value_end = 0;
 	char	*path_entry = NULL;
+	int	path_entry_length = 0;
 
 	if (key == NULL) {
 		return (NULL);
 	}
-	key_end = my_strlen(key);
-	value_end = my_strlen(value);
-	path_entry = malloc((key_end + value_end + 2));
+	path_entry_length = (my_strlen(key) + my_strlen(value) + 1);
+	path_entry = malloc(path_entry_length + 1);
+	my_memset(path_entry, '\0', path_entry_length);
 	path_entry = my_strcat(path_entry, key);
 	path_entry = my_strcat(path_entry, "=");
 	path_entry = my_strcat(path_entry, (value != NULL) ? value : "");
