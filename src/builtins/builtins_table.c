@@ -43,10 +43,10 @@ builtins_cmd_t	*get_builtins_cmd_table(void)
 {
 	builtins_cmd_t *cmd_table = NULL;
 	builtins_cmd_t	BUILTINS_CMD_LIST[] = {
-		{IDX_CMD_SETENV, CMD_SETENV, "setenv", &ms_setenv},
-		{IDX_CMD_UNSETENV, CMD_UNSETENV, "unsetenv", &ms_unsetenv},
-		{IDX_CMD_CD, CMD_CD, "cd", &ms_cd},
-		{IDX_CMD_EXIT, CMD_EXIT, "exit", &ms_exit},
+		{IDX_CMD_SETENV, CMD_SETENV, "setenv", &ms_setenv_handle},
+		{IDX_CMD_UNSETENV, CMD_UNSETENV, "unsetenv", &ms_unsetenv_handle},
+		{IDX_CMD_CD, CMD_CD, "cd", &ms_cd_handle},
+		{IDX_CMD_EXIT, CMD_EXIT, "exit", &ms_exit_handle},
 	};
 	int	idx = 0;
 

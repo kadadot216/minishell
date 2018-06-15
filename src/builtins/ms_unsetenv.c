@@ -7,7 +7,7 @@
 
 #include "shell/shell.h"
 
-void	ms_unsetenv(shell_t *shell)
+void	ms_unsetenv_handle(shell_t *shell)
 {
 
 }

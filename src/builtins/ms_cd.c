@@ -7,7 +7,7 @@
 
 #include "shell/shell.h"
 
-void	ms_cd(shell_t *shell)
+void	ms_cd_handle(shell_t *shell)
 {
 
 }

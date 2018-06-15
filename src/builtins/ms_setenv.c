@@ -9,57 +9,120 @@
 #include "shell/shell.h"
 #include "builtins/builtins_functions.h"
 #include "shell/path_cmd.h"
+#include "env/getenv.h"
 #include "my.h"
 
-char	*create_path_entry(char *key, char *value)
+char	*create_env_entry(char *key, char *value)
 {
-	char	*path_entry = NULL;
-	int	path_entry_length = 0;
+	char	*env_entry = NULL;
+	int	env_entry_length = 0;
 
 	if (key == NULL) {
+		return (key);
+	}
+	env_entry_length = (my_strlen(key) + my_strlen(value) + 1);
+	env_entry = malloc(env_entry_length + 1);
+	if (env_entry == NULL) {
 		return (NULL);
 	}
-	path_entry_length = (my_strlen(key) + my_strlen(value) + 1);
-	path_entry = malloc(path_entry_length + 1);
-	my_memset(path_entry, '\0', path_entry_length);
-	path_entry = my_strcat(path_entry, key);
-	path_entry = my_strcat(path_entry, "=");
-	path_entry = my_strcat(path_entry, (value != NULL) ? value : "");
-	return (path_entry);
+	my_memset(env_entry, '\0', env_entry_length);
+	env_entry = my_strcat(env_entry, key);
+	env_entry = my_strcat(env_entry, "=");
+	env_entry = my_strcat(env_entry, value);
+	return (env_entry);
 }
 
-char	**setenv_append(char **env, char **prompt)
+char	**setenv_append(char **env, char *key, char *value)
 {
 	int	height = 0;
-	char	*path_entry = NULL;
+	char	*env_entry = NULL;
 	char	**env_tmp = NULL;
 
-	if (env == NULL || prompt == NULL) {
-		return (NULL);
+	if (env == NULL || key == NULL) {
+		return (env);
 	}
-	path_entry = create_path_entry(prompt[0], prompt[1]);
+	env_entry = create_env_entry(key, value);
 	env_tmp = my_strtabdup(env);
 	height = my_strtablen(env);
 	env = my_strtab_realloc(env, (height + 1));
+	if (env == NULL) {
+		return (NULL);
+	}
 	env = my_strtabptncpy(env, env_tmp, height);
 	env_tmp = NULL;
-	env[height] = path_entry;
+	env[height] = env_entry;
 	return (env);
 }
 
-void	ms_setenv(shell_t *shell)
+char	**setenv_replace(char **env, char *key, char *new_value, int key_idx)
 {
-	int	ac = my_strtablen(shell->prompt);
+	char	*new_entry = NULL;	
+	int	ne_length = 0;
+
+	if (env == NULL || key == NULL) {
+		return (env);
+	}
+	ne_length = (my_strlen(key) + my_strlen(new_value) + 1);
+	new_entry = malloc(sizeof(char) * (ne_length + 1));
+	if (new_entry == NULL) {
+		return (env);
+	}
+	my_memset(new_entry, '\0', ne_length);
+	new_entry = my_strcat(new_entry, key);
+	new_entry = my_strcat(new_entry, "=");
+	new_entry = my_strcat(new_entry, new_value);
+	free(env[key_idx]);
+	env[key_idx] = new_entry;
+	return (env);
+}
+
+int	setenv_right_nb_args(int ac)
+{
+	return (ac == 2 || ac == 3);
+}
+
+void	setenv_handle_exceptions(int ac, shell_t *shell)
+{
 	char	*exec_env = NULL;
 
-	if ((ac == 2 || ac == 3) && shell->env) {
-		shell->env = setenv_append(shell->env, &shell->prompt[1]);
-
-	} else if (ac > 3){
+	if (ac > 3) {
 		my_puterror(shell->prompt[0]);
 		my_puterror(": Too many arguments.\n");
 	} else {
 		exec_env = search_exec("env", shell->paths);
 		exec_fork(exec_env, shell->paths, shell->env);
+	}
+}
+
+shell_t	*run_ms_setenv(shell_t *shell)
+{
+	char	*key = NULL;
+	char	*value = NULL;
+	int	key_idx = -1;
+
+	if (shell->prompt == NULL) {
+		return (shell);
+	}
+	key = shell->prompt[1];
+	value = (shell->prompt[2] != NULL) ? shell->prompt[2] : "";
+	key_idx = get_env_key_idx(shell->env, key);
+	if (key_idx < 0) {
+		shell->env = setenv_append(shell->env, key, value);
+	} else {
+		shell->env = setenv_replace(shell->env, key, value, key_idx);
+	}
+	return (shell);
+}
+
+
+void	ms_setenv_handle(shell_t *shell)
+{
+	int	ac = my_strtablen(shell->prompt);
+
+	if (setenv_right_nb_args(ac) && shell->env) {
+		shell = run_ms_setenv(shell);
+
+	} else if (shell->env) {
+		setenv_handle_exceptions(ac, shell);
 	}
 }

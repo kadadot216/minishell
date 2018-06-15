@@ -12,9 +12,9 @@
 
 typedef	void (*builtin_fct)(shell_t *shell);
 
-void	ms_setenv(shell_t *shell);
-void	ms_unsetenv(shell_t *shell);
-void	ms_exit(shell_t *shell);
-void	ms_cd(shell_t *shell);
+void	ms_setenv_handle(shell_t *shell);
+void	ms_unsetenv_handle(shell_t *shell);
+void	ms_exit_handle(shell_t *shell);
+void	ms_cd_handle(shell_t *shell);
 
 #endif

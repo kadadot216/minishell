@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "shell/shell.h"
 
-void	ms_exit(shell_t *shell)
+void	ms_exit_handle(shell_t *shell)
 {
 	unset_shell(shell);
 	exit(0);

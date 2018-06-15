@@ -9,5 +9,6 @@
 #define __GETENV_H__
 
 char	*get_env_entry(char **env, char *var);
+int	get_env_key_idx(char **env, char *key);
 
 #endif

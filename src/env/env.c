@@ -11,11 +11,12 @@
 char	*get_env_entry(char **env, char *key)
 {
 	int	i = 0;
-	int	key_end = my_strlen(key);
+	int	key_end = 0;
 	char	*value = NULL;
 
-	if (!key_end)
+	if (key == NULL || env == NULL)
 		return (NULL);
+	key_end = my_strlen(key);
 	while (env[i] != NULL) {
 		if (my_strncmp(key, env[i], key_end) == 0) {
 			value = env[i];
@@ -25,4 +26,21 @@ char	*get_env_entry(char **env, char *key)
 		i++;
 	}
 	return (NULL);
+}
+
+int	get_env_key_idx(char **env, char *key)
+{
+	int	idx = 0;
+	int	key_end = 0;
+
+	if (key == NULL || env == NULL)
+		return (-1);
+	key_end = my_strlen(key);
+	while (env[idx] != NULL) {
+		if (my_strncmp(key, env[idx], key_end) == 0) {
+			return (idx);
+		}
+		idx++;
+	}
+	return (-1);
 }
