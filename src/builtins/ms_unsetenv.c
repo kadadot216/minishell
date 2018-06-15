@@ -7,7 +7,7 @@
 
 #include <stdlib.h>
 #include "shell/shell.h"
-#include "env/getenv.h"
+#include "shell/env.h"
 #include "my.h"
 
 int	unsetenv_right_nb_args(int ac)

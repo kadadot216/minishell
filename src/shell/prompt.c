@@ -25,7 +25,7 @@ int	is_prompt_empty(char **prompt)
 
 char	**set_prompt(char *input)
 {
-	char		**prompt = NULL;
+	char	**prompt = NULL;
 
 	prompt = my_strtotab(input, " ");
 	if (!prompt) {
@@ -37,10 +37,10 @@ char	**set_prompt(char *input)
 
 char	**wait_for_prompt(void)
 {
-	char		*gnl_prompt = NULL;
-	char		**prompt = NULL;
+	char	*gnl_prompt = NULL;
+	char	**prompt = NULL;
 
-	my_putstr("$>");
+	my_putstr("[minishell1]>");
 	gnl_prompt = get_next_line(0);
 	if (!gnl_prompt) {
 		return (NULL);

@@ -11,8 +11,8 @@
 #include "str.h"
 #include "strtab.h"
 
-int	my_putstr(char const *str);
 void	my_putchar(char const c);
 void	my_puterror(char *strerr);
+int	my_putstr(char const *str);
 
 #endif

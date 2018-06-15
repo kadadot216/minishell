@@ -16,9 +16,9 @@ int	is_a_builtin(pcmd_t pcmd)
 
 pcmd_t	get_cmd_type(builtins_cmd_t *builtins, char *cmd)
 {
-	int		cur_idx = 0;
+	int	cur_idx = 0;
+
 	if (!builtins) {
-		// Error msg
 		return (NUL);
 	}
 	while (cur_idx < IDX_PCMD_EOL) {

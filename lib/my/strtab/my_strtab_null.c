@@ -11,7 +11,7 @@
 char	**my_strtab_null(char **tab, int height)
 {
 	int	i = 0;
-	
+
 	if (tab == NULL) {
 		return (NULL);
 	}

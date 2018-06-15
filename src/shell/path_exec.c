@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** path_cmd.c
+** path_exec.c
 ** File description:
 ** Functions related to execute PATH commands
 */
@@ -57,7 +57,7 @@ void	exec_fork(char *exec_bin, char **prompt, char **env)
 void	launch_path_cmd(shell_t *shell)
 {
 	char	*exec_bin = NULL;
-	
+
 	exec_bin = search_exec(shell->prompt[0], shell->paths);
 	if (exec_bin != NULL) {
 		exec_fork(exec_bin, shell->prompt, shell->env);

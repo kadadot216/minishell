@@ -11,7 +11,7 @@
 #include "shell/prompt.h"
 #include "shell/launch_cmd.h"
 #include "builtins/builtins.h"
-#include "env/getenv.h"
+#include "shell/env.h"
 
 int	main(int ac, char **av, char **ae)
 {

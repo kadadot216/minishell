@@ -13,7 +13,7 @@ char	**my_strtabdup(char **tab)
 {
 	char	**dest = NULL;
 	int	i = 0;
-	
+
 	if (tab == NULL)
 		return (NULL);
 	i = my_strtablen(tab);

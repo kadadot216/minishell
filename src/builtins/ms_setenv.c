@@ -6,31 +6,12 @@
 */
 
 #include <stdlib.h>
-#include "shell/shell.h"
-#include "builtins/builtins_functions.h"
-#include "shell/path_cmd.h"
-#include "env/getenv.h"
 #include "my.h"
-
-char	*create_env_entry(char *key, char *value)
-{
-	char	*env_entry = NULL;
-	int	env_entry_length = 0;
-
-	if (key == NULL) {
-		return (key);
-	}
-	env_entry_length = (my_strlen(key) + my_strlen(value) + 1);
-	env_entry = malloc(env_entry_length + 1);
-	if (env_entry == NULL) {
-		return (NULL);
-	}
-	my_memset(env_entry, '\0', env_entry_length);
-	env_entry = my_strcat(env_entry, key);
-	env_entry = my_strcat(env_entry, "=");
-	env_entry = my_strcat(env_entry, value);
-	return (env_entry);
-}
+#include "shell/shell.h"
+#include "shell/env.h"
+#include "shell/path_cmd.h"
+#include "builtins/builtins_functions.h"
+#include "builtins/setenv_check.h"
 
 char	**setenv_append(char **env, char *key, char *value)
 {
@@ -57,7 +38,7 @@ char	**setenv_append(char **env, char *key, char *value)
 
 char	**setenv_replace(char **env, char *key, char *new_value, int key_idx)
 {
-	char	*new_entry = NULL;	
+	char	*new_entry = NULL;
 	int	ne_length = 0;
 
 	if (env == NULL || key == NULL) {
@@ -75,11 +56,6 @@ char	**setenv_replace(char **env, char *key, char *new_value, int key_idx)
 	free(env[key_idx]);
 	env[key_idx] = new_entry;
 	return (env);
-}
-
-int	setenv_right_nb_args(int ac)
-{
-	return (ac == 2 || ac == 3);
 }
 
 void	setenv_handle_exceptions(int ac, shell_t *shell)

@@ -10,6 +10,6 @@
 
 int	is_prompt_allocated(char **prompt);
 char	**wait_for_prompt(void);
-char 	**set_prompt(char *input);
+char	**set_prompt(char *input);
 
 #endif

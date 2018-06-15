@@ -26,10 +26,12 @@ LIB_HDS		=	$(addprefix $(LIB_HDPATH)/, $(LIB_HDSRC))
 LIB_SRCS	=	str/my_strcmp.c			\
 			str/my_strcpy.c			\
 			str/my_strlen.c			\
+			str/my_strlentok.c		\
 			str/my_strncat.c		\
 			str/my_strncmp.c		\
 			str/my_strncpy.c 		\
 			str/my_strdup.c 		\
+			str/my_strndup.c 		\
 			str/my_memset.c 		\
 			str/my_strcat.c 		\
 			strtab/my_strtabcpy.c		\
@@ -58,15 +60,17 @@ CFLAGS		+=	-I$(HDPATH)
 NAME		=	mysh
 LDFLAGS		=	-L./lib
 LIBFLAG		=	-lmy -lgnl
-SRC		=	src/shell/prompt.c		\
+SRC		=	src/shell/shell.c		\
+			src/shell/prompt.c		\
 			src/shell/prompt_type.c		\
-			src/shell/path_cmd.c		\
-			src/shell/shell.c		\
+			src/shell/path.c		\
+			src/shell/path_exec.c		\
 			src/shell/cmd_dispatcher.c	\
-			src/env/env.c			\
+			src/shell/env.c			\
 			src/builtins/builtins_table.c	\
 			src/builtins/ms_cd.c		\
 			src/builtins/ms_setenv.c	\
+			src/builtins/ms_setenv_checks.c	\
 			src/builtins/ms_unsetenv.c	\
 			src/builtins/ms_exit.c	
 			
