@@ -7,7 +7,8 @@
 
 #include <stdlib.h>
 #include "my.h"
-#include "builtins/builtins.h"
+#include "builtins/builtin_types.h"
+#include "builtins/builtins_helpers.h"
 #include "shell/path_cmd.h"
 #include "shell/prompt_type.h"
 
@@ -15,8 +16,10 @@ void	launch_builtin_cmd(builtins_cmd_t *builtins, shell_t *shell)
 {
 	int	fct_idx = get_fct_idx_from_pcmd(builtins, shell->pcmd_f);
 
-	if (!(fct_idx < 0)) {
+	if (!(fct_idx < 0) && fct_idx != IDX_CMD_EXIT) {
 		builtins[fct_idx].cmd_fct(shell);
+	} else if (fct_idx == IDX_CMD_EXIT) {
+		builtins[fct_idx].cmd_fct(shell, builtins);
 	}
 }
 

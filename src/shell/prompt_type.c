@@ -7,7 +7,7 @@
 
 #include <stdlib.h>
 #include "my.h"
-#include "builtins/builtins.h"
+#include "builtins/builtin_types.h"
 
 int	is_a_builtin(pcmd_t pcmd)
 {

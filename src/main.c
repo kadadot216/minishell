@@ -10,7 +10,8 @@
 #include "shell/shell.h"
 #include "shell/prompt.h"
 #include "shell/launch_cmd.h"
-#include "builtins/builtins.h"
+#include "builtins/builtins_helpers.h"
+#include "builtins/builtins_functions.h"
 #include "shell/env.h"
 
 int	main(int ac, char **av, char **ae)
@@ -25,7 +26,6 @@ int	main(int ac, char **av, char **ae)
 		shell->prompt = my_free_strtab(shell->prompt);
 		shell->prompt = wait_for_prompt();
 	}
-	builtins_cmds = clear_builtins(builtins_cmds);
-	unset_shell(shell);
+	ms_exit_handle(shell, builtins_cmds);
 	return (0);
 }

@@ -6,7 +6,8 @@
 */
 
 #include <stdlib.h>
-#include "builtins/builtins.h"
+#include "builtins/builtins_helpers.h"
+#include "builtins/builtins_functions.h"
 #include "my.h"
 
 builtins_cmd_t	clear_builtin(builtins_cmd_t *builtin)

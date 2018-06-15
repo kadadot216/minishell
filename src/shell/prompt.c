@@ -40,7 +40,7 @@ char	**wait_for_prompt(void)
 	char	*gnl_prompt = NULL;
 	char	**prompt = NULL;
 
-	my_putstr("[minishell1]>");
+	my_putstr("[minishell1]> ");
 	gnl_prompt = get_next_line(0);
 	if (!gnl_prompt) {
 		return (NULL);

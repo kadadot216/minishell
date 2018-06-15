@@ -8,15 +8,7 @@
 #ifndef __BUILTINS_H__
 #define __BUILTINS_H__
 
-#include "shell/prompt_type.h"
-#include "builtins_functions.h"
-
-typedef struct	builtins_cmd_s {
-	pcmd_idx_t	pcmd_idx;
-	pcmd_t	pcmd;
-	char	*cmd_name;
-	builtin_fct	cmd_fct;
-} builtins_cmd_t;
+#include "builtin_types.h"
 
 int	get_fct_idx_from_pcmd(builtins_cmd_t *builtins, pcmd_t pcmd);
 pcmd_t	check_prompt_from_builtins(builtins_cmd_t *builtins, char **prompt);
