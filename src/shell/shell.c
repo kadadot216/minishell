@@ -6,8 +6,9 @@
 */
 
 #include <stdlib.h>
-#include "shell/shell.h"
+#include "str.h"
 #include "strtab.h"
+#include "shell/shell.h"
 #include "env/getenv.h"
 
 int	is_shell_allocated(shell_t *shell)
@@ -62,6 +63,19 @@ char	**set_path_from_env(char **env)
 	path_str = get_env_entry(env, "PATH");
 	paths = (path_str == NULL) ? NULL : my_strtotab(path_str, ":");
 	return (paths);
+}
+
+int	path_needs_update(shell_t *shell)
+{
+	char	*shell_path = NULL;
+	char	*paths = NULL;
+	
+	if (shell->env == NULL || shell->paths == NULL) {
+		return (-1);
+	}
+	shell_path = my_strtab_to_strwtok(shell->paths, ":");
+	paths = get_env_entry(shell->env, "PATH");
+	return (my_strcmp(shell_path, paths) != 0);
 }
 
 shell_t	*setup_shell(char **ae)

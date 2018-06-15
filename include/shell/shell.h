@@ -22,5 +22,6 @@ typedef struct	shell_s {
 shell_t	*unset_shell(shell_t *shell);
 shell_t	*setup_shell(char **ae);
 char	**set_path_from_env(char **env);
+int	path_needs_update(shell_t *shell);
 
 #endif

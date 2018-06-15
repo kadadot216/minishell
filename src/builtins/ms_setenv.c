@@ -45,10 +45,11 @@ char	**setenv_append(char **env, char *key, char *value)
 	env_tmp = my_strtabdup(env);
 	height = my_strtablen(env);
 	env = my_strtab_realloc(env, (height + 1));
-	if (env == NULL) {
-		return (NULL);
+	if (env == NULL || env_tmp == NULL) {
+		return (env);
 	}
 	env = my_strtabptncpy(env, env_tmp, height);
+	my_strtab_null(env_tmp, height);
 	env_tmp = NULL;
 	env[height] = env_entry;
 	return (env);
@@ -83,15 +84,11 @@ int	setenv_right_nb_args(int ac)
 
 void	setenv_handle_exceptions(int ac, shell_t *shell)
 {
-	char	*exec_env = NULL;
-
 	if (ac > 3) {
 		my_puterror(shell->prompt[0]);
 		my_puterror(": Too many arguments.\n");
-	} else {
-		exec_env = search_exec("env", shell->paths);
-		exec_fork(exec_env, shell->paths, shell->env);
-	}
+	} else
+		my_show_word_array(shell->env);
 }
 
 shell_t	*run_ms_setenv(shell_t *shell)
@@ -100,7 +97,7 @@ shell_t	*run_ms_setenv(shell_t *shell)
 	char	*value = NULL;
 	int	key_idx = -1;
 
-	if (shell->prompt == NULL) {
+	if (shell->prompt == NULL || shell->env == NULL) {
 		return (shell);
 	}
 	key = shell->prompt[1];
@@ -112,19 +109,6 @@ shell_t	*run_ms_setenv(shell_t *shell)
 		shell->env = setenv_replace(shell->env, key, value, key_idx);
 	}
 	return (shell);
-}
-
-int	path_needs_update(shell_t *shell)
-{
-	char	*shell_path = NULL;
-	char	*paths = NULL;
-	
-	if (shell->env == NULL || shell->paths == NULL) {
-		return (-1);
-	}
-	shell_path = my_strtab_to_strwtok(shell->paths, ":");
-	paths = get_env_entry(shell->env, "PATH");
-	return (my_strcmp(shell_path, paths) != 0);
 }
 
 void	ms_setenv_handle(shell_t *shell)

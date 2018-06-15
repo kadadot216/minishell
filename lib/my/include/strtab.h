@@ -20,6 +20,8 @@ char	**my_strtab_realloc(char **tab, int size);
 char	**my_strtab_nclone(char **dest, char *const *src, int n);
 char	**my_strtabptncpy(char **dest, char **src, int n);
 char	*my_strtab_to_strwtok(char **tab, char *delim);
+int	my_show_word_array(char *const *tab);
+char	**my_strtabcat(char **dest, char **src);
 
 #endif
 

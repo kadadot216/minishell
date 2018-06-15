@@ -42,6 +42,8 @@ LIB_SRCS	=	str/my_strcmp.c			\
 			strtab/my_strtab_realloc.c	\
 			strtab/my_strtabptncpy.c	\
 			strtab/my_strtab_to_strwtok.c	\
+			strtab/my_show_word_array.c	\
+			strtab/my_strtabcat.c		\
 			my_putchar.c			\
 			my_puterror.c			\
 			my_putstr.c
