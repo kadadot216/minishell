@@ -10,5 +10,6 @@
 
 void	ms_exit(shell_t *shell)
 {
+	unset_shell(shell);
 	exit(0);
 }

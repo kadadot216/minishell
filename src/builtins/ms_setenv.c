@@ -22,7 +22,7 @@ char	*create_path_entry(char *key, char *value)
 	}
 	key_end = my_strlen(key);
 	value_end = my_strlen(value);
-	path_entry = malloc(sizeof(char) * (key_end + value_end + 2));
+	path_entry = malloc((key_end + value_end + 2));
 	path_entry = my_strcat(path_entry, key);
 	path_entry = my_strcat(path_entry, "=");
 	path_entry = my_strcat(path_entry, (value != NULL) ? value : "");
@@ -38,12 +38,12 @@ char	**setenv_append(char **env, char **prompt)
 	if (env == NULL || prompt == NULL) {
 		return (NULL);
 	}
+	path_entry = create_path_entry(prompt[0], prompt[1]);
 	env_tmp = my_strtabdup(env);
 	height = my_strtablen(env);
 	env = my_strtab_realloc(env, (height + 1));
-	env = my_strtab_nclone(env, env_tmp, height);
-	free(env_tmp);
-	path_entry = create_path_entry(prompt[0], prompt[1]);
+	env = my_strtabptncpy(env, env_tmp, height);
+	env_tmp = NULL;
 	env[height] = path_entry;
 	return (env);
 }

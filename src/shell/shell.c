@@ -55,15 +55,17 @@ shell_t	*setup_shell(char **ae)
 {
 	shell_t	*shell = NULL;
 	char	*paths = NULL;
+	char	**pathstab = NULL;
 
 	shell = set_empty_shell();
 	if (!is_shell_allocated(shell) || ae == NULL) {
 		// Error msg
 		return (NULL);
 	}
+	shell->prompt = NULL;
 	shell->env = my_strtabdup(ae);
 	paths = get_env_entry(shell->env, "PATH");
-	shell->paths = (paths == NULL) ? NULL : my_strtotab(paths, ":");
-	shell->prompt = NULL;
+	pathstab = (paths == NULL) ? NULL : my_strtotab(paths, ":");
+	shell->paths = (paths == NULL) ? NULL :  my_strtabdup(pathstab);
 	return (shell);
 }
