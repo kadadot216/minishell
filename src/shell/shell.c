@@ -51,11 +51,22 @@ shell_t	*set_empty_shell(void)
 	return (shell);
 }
 
+char	**set_path_from_env(char **env)
+{
+	char	*path_str = NULL;
+	char	**paths = NULL;
+
+	if (env == NULL) {
+		return (NULL);
+	}
+	path_str = get_env_entry(env, "PATH");
+	paths = (path_str == NULL) ? NULL : my_strtotab(path_str, ":");
+	return (paths);
+}
+
 shell_t	*setup_shell(char **ae)
 {
 	shell_t	*shell = NULL;
-	char	*paths = NULL;
-	char	**pathstab = NULL;
 
 	shell = set_empty_shell();
 	if (!is_shell_allocated(shell) || ae == NULL) {
@@ -64,8 +75,6 @@ shell_t	*setup_shell(char **ae)
 	}
 	shell->prompt = NULL;
 	shell->env = my_strtabdup(ae);
-	paths = get_env_entry(shell->env, "PATH");
-	pathstab = (paths == NULL) ? NULL : my_strtotab(paths, ":");
-	shell->paths = (paths == NULL) ? NULL :  my_strtabdup(pathstab);
+	shell->paths = set_path_from_env(shell->env);
 	return (shell);
 }

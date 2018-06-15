@@ -114,6 +114,18 @@ shell_t	*run_ms_setenv(shell_t *shell)
 	return (shell);
 }
 
+int	path_needs_update(shell_t *shell)
+{
+	char	*shell_path = NULL;
+	char	*paths = NULL;
+	
+	if (shell->env == NULL || shell->paths == NULL) {
+		return (-1);
+	}
+	shell_path = my_strtab_to_strwtok(shell->paths, ":");
+	paths = get_env_entry(shell->env, "PATH");
+	return (my_strcmp(shell_path, paths) != 0);
+}
 
 void	ms_setenv_handle(shell_t *shell)
 {
@@ -121,8 +133,10 @@ void	ms_setenv_handle(shell_t *shell)
 
 	if (setenv_right_nb_args(ac) && shell->env) {
 		shell = run_ms_setenv(shell);
-
 	} else if (shell->env) {
 		setenv_handle_exceptions(ac, shell);
+	}
+	if (path_needs_update(shell)) {
+		shell->paths = set_path_from_env(shell->env);
 	}
 }
