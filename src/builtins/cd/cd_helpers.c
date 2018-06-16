@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** ms_cd_helpers.c
+** cd_helpers.c
 ** File description:
 ** Helper functions for ms_cd
 */

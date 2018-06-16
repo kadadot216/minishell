@@ -61,20 +61,23 @@ CFLAGS		+=	-I$(HDPATH)
 NAME		=	mysh
 LDFLAGS		=	-L./lib
 LIBFLAG		=	-lmy -lgnl
-SRC		=	src/shell/shell.c		\
-			src/shell/prompt.c		\
-			src/shell/prompt_type.c		\
-			src/shell/path.c		\
-			src/shell/path_exec.c		\
-			src/shell/cmd_dispatcher.c	\
-			src/shell/env.c			\
-			src/builtins/builtins_table.c	\
-			src/builtins/ms_cd_helpers.c	\
-			src/builtins/ms_cd.c		\
-			src/builtins/ms_env.c		\
-			src/builtins/ms_setenv.c	\
-			src/builtins/ms_setenv_checks.c	\
-			src/builtins/ms_unsetenv.c	\
+SRC		=	src/shell/shell.c			\
+			src/shell/prompt.c			\
+			src/shell/prompt_type.c			\
+			src/shell/path.c			\
+			src/shell/path_exec.c			\
+			src/shell/cmd_dispatcher.c		\
+			src/shell/env.c				\
+			src/builtins/builtins_table.c		\
+			src/builtins/ms_cd.c			\
+			src/builtins/cd/cd_helpers.c		\
+			src/builtins/cd/cd_checking.c		\
+			src/builtins/cd/cd_path_test.c		\
+			src/builtins/cd/cd_path_transform.c	\
+			src/builtins/ms_env.c			\
+			src/builtins/ms_setenv.c		\
+			src/builtins/ms_setenv_checks.c		\
+			src/builtins/ms_unsetenv.c		\
 			src/builtins/ms_exit.c	
 			
 MAIN		=	src/main.c

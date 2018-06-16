@@ -10,8 +10,6 @@
 
 #define GETCWD_MAXSIZE (4096)
 
-char	*ms_cd_get_cd(void);
-
 enum	filetype_bitmask_e {
 	S_IFMT = 0170000,
 	S_IFSOCK = 0140000,
@@ -23,11 +21,18 @@ enum	filetype_bitmask_e {
 	S_IFIFO = 0010000
 };
 
-
 enum	cd_checking_status_e {
 	CD_NEXISTS = -1,
 	CD_NOTDIR = 0,
 	CD_ISDIR = 1,
 };
+
+void	interpret_cd_status(enum cd_checking_status_e status, char **prompt);
+void	cd_sanitize_exceptions(char *arg, char *cwd);
+char	*ms_cd_get_cd(void);
+int	test_cd_path(char *cd_path);
+int	cd_right_nb_args(int ac);
+int	arg_uses_currdir_notation(char const *arg);
+int	arg_uses_parentdir_notation(char const *arg);
 
 #endif
