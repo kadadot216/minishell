@@ -37,3 +37,9 @@ void	interpret_cd_status(enum cd_checking_status_e status, char **prompt)
 		my_puterror(": No such file or directory\n");
 	}
 }
+
+int	test_absolute_path(char **prompt)
+{
+	return (prompt != NULL && prompt[1] != NULL
+		&& prompt[1][0] != '\0' && prompt[1][0] == '/');
+}

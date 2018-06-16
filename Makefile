@@ -69,6 +69,7 @@ SRC		=	src/shell/shell.c			\
 			src/shell/env.c				\
 			src/builtins/builtins_table.c		\
 			src/builtins/ms_cd.c			\
+			src/builtins/cd/cd_path_setup.c		\
 			src/builtins/cd/cd_helpers.c		\
 			src/builtins/cd/cd_checking.c		\
 			src/builtins/cd/cd_path_test.c		\
