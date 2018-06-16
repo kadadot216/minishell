@@ -44,6 +44,7 @@ builtins_cmd_t	*get_builtins_cmd_table(void)
 {
 	builtins_cmd_t *cmd_table = NULL;
 	builtins_cmd_t	BUILTINS_CMD_LIST[] = {
+		{IDX_CMD_ENV, CMD_ENV, "env", &ms_env_handle},
 		{IDX_CMD_SETENV, CMD_SETENV, "setenv", &ms_setenv_handle},
 		{IDX_CMD_UNSETENV, CMD_UNSETENV, "unsetenv",
 			&ms_unsetenv_handle},

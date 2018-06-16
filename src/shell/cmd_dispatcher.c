@@ -7,9 +7,9 @@
 
 #include <stdlib.h>
 #include "my.h"
-#include "builtins/builtin_types.h"
 #include "builtins/builtins_helpers.h"
 #include "shell/path_cmd.h"
+#include "shell/launch_cmd.h"
 #include "shell/prompt_type.h"
 
 void	launch_builtin_cmd(builtins_cmd_t *builtins, shell_t *shell)
@@ -28,7 +28,7 @@ void	dispatch_command(builtins_cmd_t *builtins, shell_t *shell)
 	shell->pcmd_f = check_prompt_from_builtins(builtins, shell->prompt);
 	if (shell->pcmd_f == CMD_EXEC)
 		launch_path_cmd(shell);
-	if (is_a_builtin(shell->pcmd_f)) {
+	if (is_a_builtin(builtins, shell->pcmd_f)) {
 		launch_builtin_cmd(builtins, shell);
 	}
 	shell->pcmd_f = reset_prompt_type();

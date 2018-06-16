@@ -27,10 +27,11 @@ char	**set_prompt(char *input)
 {
 	char	**prompt = NULL;
 
-	prompt = my_strtotab(input, " ");
-	if (!prompt) {
-		return (NULL);
+	if (input == NULL) {
+		return (prompt);
 	} else {
+		input = my_remove_trailing_spaces(input);
+		prompt = my_strtotab(input, " ");
 		return (prompt);
 	}
 }

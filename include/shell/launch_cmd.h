@@ -11,6 +11,7 @@
 #include "shell.h"
 #include "builtins/builtin_types.h"
 
+int	is_a_builtin(builtins_cmd_t *builtins, pcmd_t pcmd);
 void	dispatch_command(builtins_cmd_t *builtins, shell_t *shell);
 
 #endif

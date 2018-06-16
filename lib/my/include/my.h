@@ -14,5 +14,6 @@
 void	my_putchar(char const c);
 void	my_puterror(char *strerr);
 int	my_putstr(char const *str);
+char	*my_remove_trailing_spaces(char *str);
 
 #endif

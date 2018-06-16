@@ -64,7 +64,7 @@ void	setenv_handle_exceptions(int ac, shell_t *shell)
 		my_puterror(shell->prompt[0]);
 		my_puterror(": Too many arguments.\n");
 	} else
-		my_show_word_array(shell->env);
+		ms_env_handle(shell);
 }
 
 shell_t	*run_ms_setenv(shell_t *shell)

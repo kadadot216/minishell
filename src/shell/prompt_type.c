@@ -9,9 +9,17 @@
 #include "my.h"
 #include "builtins/builtin_types.h"
 
-int	is_a_builtin(pcmd_t pcmd)
+int	is_a_builtin(builtins_cmd_t *builtins, pcmd_t pcmd)
 {
-	return (pcmd & (CMD_EXIT ^ CMD_SETENV ^ CMD_UNSETENV ^ CMD_CD));
+	int	idx = 0;
+
+	while (idx < IDX_PCMD_EOL) {
+		if (pcmd == builtins[idx].pcmd) {
+			return (1);
+		}
+		idx++;
+	}
+	return (0);
 }
 
 pcmd_t	get_cmd_type(builtins_cmd_t *builtins, char *cmd)

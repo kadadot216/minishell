@@ -24,6 +24,11 @@ char	**set_path_from_env(char **env)
 	return (paths);
 }
 
+int	both_are_null(char *s1, char *s2)
+{
+	return (s1 == NULL && s2 == NULL);
+}
+
 int	path_needs_update(shell_t *shell)
 {
 	char	*shell_path = NULL;
@@ -34,6 +39,9 @@ int	path_needs_update(shell_t *shell)
 	}
 	shell_path = my_strtab_to_strwtok(shell->paths, ":");
 	paths = get_env_entry(shell->env, "PATH");
-	return (my_strcmp(shell_path, paths) != 0);
+	if (paths == NULL)
+		return (-1);
+	return ((my_strcmp(shell_path, paths) != 0) ||
+	both_are_null(shell_path, paths));
 }
 
