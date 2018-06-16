@@ -10,10 +10,10 @@
 
 #include "prompt_type.h"
 
-typedef char*	path_t;
-
 typedef struct	shell_s {
-	path_t	*paths;
+	char	*cwd;
+	char	*homedir;
+	char	**paths;
 	char	**env;
 	char	**prompt;
 	pcmd_t	pcmd_f;

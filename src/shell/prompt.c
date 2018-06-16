@@ -36,12 +36,14 @@ char	**set_prompt(char *input)
 	}
 }
 
-char	**wait_for_prompt(void)
+char	**wait_for_prompt(char *cwd)
 {
 	char	*gnl_prompt = NULL;
 	char	**prompt = NULL;
 
-	my_putstr("[minishell1]> ");
+	my_putstr("[");
+	my_putstr(cwd);
+	my_putstr("]> ");
 	gnl_prompt = get_next_line(0);
 	if (!gnl_prompt) {
 		return (NULL);

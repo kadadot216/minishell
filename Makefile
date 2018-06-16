@@ -69,6 +69,7 @@ SRC		=	src/shell/shell.c		\
 			src/shell/cmd_dispatcher.c	\
 			src/shell/env.c			\
 			src/builtins/builtins_table.c	\
+			src/builtins/ms_cd_helpers.c	\
 			src/builtins/ms_cd.c		\
 			src/builtins/ms_env.c		\
 			src/builtins/ms_setenv.c	\

@@ -33,6 +33,7 @@ builtins_cmd_t	*clear_builtins(builtins_cmd_t *builtins)
 builtins_cmd_t	map_builtin(builtins_cmd_t src)
 {
 	builtins_cmd_t	dest;
+
 	dest.pcmd_idx = src.pcmd_idx;
 	dest.pcmd = src.pcmd;
 	dest.cmd_name = my_strdup(src.cmd_name);
@@ -42,6 +43,7 @@ builtins_cmd_t	map_builtin(builtins_cmd_t src)
 
 builtins_cmd_t	*get_builtins_cmd_table(void)
 {
+	int	idx = 0;
 	builtins_cmd_t *cmd_table = NULL;
 	builtins_cmd_t	BUILTINS_CMD_LIST[] = {
 		{IDX_CMD_ENV, CMD_ENV, "env", &ms_env_handle},
@@ -51,10 +53,8 @@ builtins_cmd_t	*get_builtins_cmd_table(void)
 		{IDX_CMD_CD, CMD_CD, "cd", &ms_cd_handle},
 		{IDX_CMD_EXIT, CMD_EXIT, "exit", &ms_exit_handle},
 	};
-	int	idx = 0;
 
 	cmd_table = malloc(sizeof(builtins_cmd_t) * IDX_PCMD_EOL);
-
 	while (idx < IDX_PCMD_EOL) {
 		cmd_table[idx] = map_builtin(BUILTINS_CMD_LIST[idx]);
 		idx++;

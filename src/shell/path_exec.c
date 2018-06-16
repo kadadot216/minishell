@@ -29,7 +29,7 @@ static int	can_access_command(char *cmd)
 	return ((access(cmd, F_OK) == 0) && (access(cmd, X_OK) == 0));
 }
 
-static char	*search_exec_from_path(char *exec_prompt, path_t *paths)
+static char	*search_exec_from_path(char *exec_prompt, char **paths)
 {
 	int	i = 0;
 	char	*exec_fp = NULL;

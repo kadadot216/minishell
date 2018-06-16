@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** getenv.c
+** env.c
 ** File description:
 ** env related functions
 */
