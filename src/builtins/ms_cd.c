@@ -41,14 +41,18 @@ char	*expand_cd_path(char *cwd, char *arg)
 
 char	*setup_cd_path(shell_t *shell)
 {
+	static char	last_dir[GETCWD_MAXSIZE] = {'\0'};
 	char	*target_dir = NULL;
 	char	*arg = shell->prompt[1];
 
+	init_last_dir_once(last_dir, shell->cwd);
 	if (arg == NULL) {
 		target_dir = my_strdup(shell->homedir);
 	} else if (arg[0] == '-') {
-		target_dir = my_strdup(shell->cwd);
+		target_dir = my_strdup(last_dir);
+		update_last_dir(last_dir, shell->cwd);
 	} else {
+		update_last_dir(last_dir, shell->cwd);
 		target_dir = expand_cd_path(shell->cwd, arg);
 	}
 	return (target_dir);

@@ -37,7 +37,6 @@ LIB_SRCS	=	str/my_strcmp.c			\
 			strtab/my_strtabcpy.c		\
 			strtab/my_strtabdup.c		\
 			strtab/my_strtablen.c		\
-			strtab/my_strtotabpt.c		\
 			strtab/my_strtotab.c		\
 			strtab/my_free_strtab.c		\
 			strtab/my_strtab_null.c		\

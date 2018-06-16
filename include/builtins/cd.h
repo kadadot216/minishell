@@ -27,6 +27,8 @@ enum	cd_checking_status_e {
 	CD_ISDIR = 1,
 };
 
+void	update_last_dir(char *last_dir, char *curr_dir);
+void	init_last_dir_once(char *last_dir, char *curr_dir);
 void	interpret_cd_status(enum cd_checking_status_e status, char **prompt);
 void	cd_sanitize_exceptions(char *arg, char *cwd);
 char	*ms_cd_get_cd(void);

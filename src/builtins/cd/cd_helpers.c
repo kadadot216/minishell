@@ -22,3 +22,17 @@ char	*ms_cd_get_cd(void)
 		return (current_dir);
 	}
 }
+
+void	update_last_dir(char *last_dir, char *curr_dir)
+{
+	my_memset(last_dir, '\0', my_strlen(last_dir));
+	my_strcpy(last_dir, curr_dir);
+}
+
+void	init_last_dir_once(char *last_dir, char *curr_dir)
+{
+	if (last_dir[0] == '\0') {
+		my_strcpy(last_dir, curr_dir);
+	}
+}
+
