@@ -97,6 +97,7 @@ void	ms_setenv_handle(shell_t *shell)
 		setenv_handle_exceptions(ac, shell);
 	}
 	if (path_needs_update(shell)) {
+		shell->paths = my_free_strtab(shell->paths);
 		shell->paths = set_path_from_env(shell->env);
 	}
 }

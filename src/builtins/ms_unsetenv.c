@@ -71,6 +71,7 @@ void	ms_unsetenv_handle(shell_t *shell)
 		unsetenv_handle_exceptions(shell);
 	}
 	if (path_needs_update(shell)) {
+		shell->paths = my_free_strtab(shell->paths);
 		shell->paths = set_path_from_env(shell->env);
 	}
 }
