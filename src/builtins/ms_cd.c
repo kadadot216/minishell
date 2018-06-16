@@ -24,24 +24,38 @@ void	cd_handle_exceptions(shell_t *shell)
 	my_puterror(": Too many arguments.\n");
 }
 
-char	*sanitize_cd_arg(char *arg)
+int	arg_uses_currdir_notation(char const *arg)
+{
+	return (arg != NULL && arg[0] == '.' &&
+		(arg[1] == '/' || arg[1] == '\0'));
+}
+
+int	arg_uses_parentdir_notation(char const *arg)
+{
+	return (arg != NULL && arg[0] == '.' && arg[1] == '.' &&
+		(arg[2] == '/' || arg[2] == '\0'));
+}
+
+char	*cd_sanitize_parentdir(char *cwd, char *arg)
+{
+
+}
+
+char	*cd_sanitize_currdir(char *arg)
 {
 	int	i = 0;
 
-	if (arg[0] == '.' && arg[1] == '/') {
-		i = 2;
-		while (arg[i] != '\0') {
-			arg[i-2] = arg[i];
-			i++;
-		}
-		arg[i-2] = '\0';
-		arg[i-1] = '\0';
-		arg[i] = '\0';
-		return (arg);
-	} else {
-		return (arg);
+	i = 2;
+	while (arg[i] != '\0') {
+		arg[i-2] = arg[i];
+		i++;
 	}
+	arg[i-2] = '\0';
+	arg[i-1] = '\0';
+	arg[i] = '\0';
+	return (arg);
 }
+
 
 char	*expand_cd_path(char *cwd, char *arg)
 {
@@ -51,7 +65,10 @@ char	*expand_cd_path(char *cwd, char *arg)
 	if (cwd == NULL || arg == NULL) {
 		return (target_dir);
 	}
-	arg = sanitize_cd_arg(arg);
+	if (arg_uses_currdir_notation(arg))
+		arg = cd_sanitize_currdir(arg);
+	if (arg_uses_parentdir_notation(arg))
+		my_putstr("Parent dir\n");
 	//cwd = sanitize_cd_cwd(cwd);
 	target_dir_len = (my_strlen(cwd) + my_strlen(arg) + 1);
 	target_dir = malloc(sizeof(char) * target_dir_len + 1);
