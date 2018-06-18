@@ -18,8 +18,10 @@ int	is_prompt_empty(char **prompt)
 {
 	if (!is_prompt_allocated(prompt)) {
 		return (0);
-	} else if (prompt[0] == '\0') {
+	} else if (prompt[0][0] == '\0') {
 		return (1);
+	} else {
+		return (0);
 	}
 }
 

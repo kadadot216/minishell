@@ -23,6 +23,8 @@ int	is_shell_empty(shell_t *shell)
 	}
 	if (!shell->env && !shell->paths && !shell->cwd && !shell->homedir) {
 		return (1);
+	} else {
+		return (0);
 	}
 }
 
@@ -36,6 +38,7 @@ shell_t	*unset_shell(shell_t *shell)
 	if (is_shell_empty(shell)) {
 		return (NULL);
 	}
+	return (shell);
 }
 
 shell_t	*set_empty_shell(void)

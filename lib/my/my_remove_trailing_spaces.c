@@ -13,7 +13,7 @@ char	*my_remove_trailing_spaces(char *str)
 
 	while (str[i+1] != '\0')
 		i++;
-	while (str[i] == ' ' || str[i] == 0377) {
+	while (str[i] == ' ') {
 		str[i] = '\0';
 		i--;
 	}

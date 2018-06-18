@@ -5,7 +5,7 @@
 ## Makefile for PSU_minishell1
 ##
 
-CC		=	gcc
+CC		=	gcc -W -Wall -Werror -Wextra
 DBCC		=	gcc -g
 RM		=	rm -f
 
@@ -57,7 +57,7 @@ LIB_NAME	=	lib$(LIB_NAMEDIR).a
 #	Program settings
 HDPATH		=	./include
 CFLAGS		+=	-I$(HDPATH)
-NAME		=	mysh
+NAME		=	minish
 LDFLAGS		=	-L./lib
 LIBFLAG		=	-lmy -lgnl
 SRC		=	src/shell/shell.c			\
@@ -126,7 +126,7 @@ $(NAME): lib
 clean:
 	$(RM) $(OBJ)
 
-fclean:	clean
+fclean:	clean libfclean
 	$(RM) $(HDTGR)
 	$(RM) $(LIBTGR)
 	$(RM) $(NAME)

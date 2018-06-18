@@ -18,6 +18,8 @@ int	main(int ac, char **av, char **ae)
 	shell->prompt = wait_for_prompt(shell->cwd);
 	builtins_cmd_t	*builtins_cmds = NULL;
 
+	(void)ac;
+	(void)av;
 	builtins_cmds = get_builtins_cmd_table();
 	while (is_prompt_allocated(shell->prompt) && builtins_cmds != NULL) {
 		dispatch_command(builtins_cmds, shell);
